@@ -2,11 +2,11 @@ functions:
   circles:
     lang: golang-middleware
     handler: ./micros/circles
-    image: qolzam/circles:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/circles:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/circle_config.yml
@@ -23,11 +23,11 @@ functions:
   comments:
     lang: golang-middleware
     handler: ./micros/comments
-    image: qolzam/comments:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/comments:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/comment_config.yml
@@ -44,11 +44,11 @@ functions:
   media:
     lang: golang-middleware
     handler: ./micros/gallery
-    image: qolzam/media:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/gallery:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/media_config.yml
@@ -65,11 +65,11 @@ functions:
   posts:
     lang: golang-middleware
     handler: ./micros/posts
-    image: qolzam/posts:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/posts:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/post_config.yml
@@ -86,11 +86,11 @@ functions:
   user-rels:
     lang: golang-middleware
     handler: ./micros/user-rels
-    image: qolzam/user-rels:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/user-rels:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/user_rel_config.yml
@@ -107,11 +107,11 @@ functions:
   votes:
     lang: golang-middleware
     handler: ./micros/votes
-    image: qolzam/votes:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/votes:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/vote_config.yml
@@ -128,11 +128,11 @@ functions:
   vang:
     lang: golang-middleware
     handler: ./micros/vang
-    image: qolzam/vang:v0.2.4
+    image: 693422322547.dkr.ecr.eu-west-2.amazonaws.com/telar/vang:v2.2.83
     fprocess: ""
     environment: {}
     secrets:
-    - secrets
+    - telar-web-secrets
     environment_file:
     - config/app_config.yml
     - config/vang_config.yml
@@ -148,4 +148,4 @@ functions:
       linkerd.io/inject: disabled
 provider:
   name: openfaas
-  gateway: http://192.168.1.18:31112
+  gateway: https://openfaas.kube.monitalks.io
