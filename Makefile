@@ -20,6 +20,9 @@ ARGUMENT  := $(word 1,${CMD_ARGS})
 help:		## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+commit:		## Short hand for Commit
+	git add .; git commit -m ${ARGUMENT}; git push
+
 login:  	## ECR Docker Login
 	@ aws ecr get-login-password --region $${AWS_REGION} | docker login --username AWS --password-stdin $${AWS_ACCOUNT_ID}.dkr.ecr.$${AWS_REGION}.amazonaws.com
 	@ AWS_ACCOUNT_ID=$$(aws sts get-caller-identity --output text --query 'Account'); \
