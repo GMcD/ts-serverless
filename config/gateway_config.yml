@@ -1,6 +1,6 @@
 environment:
-  cookie_root_domain: .telar.dev
-  gateway: https://social.faas.telar.dev
-  internal_gateway: http://gateway.openfaas:8080/function
-  origin: "https://social.faas.telar.dev,https://social.telar.dev,https://auth.telar.dev"
-  websocket_server_url: https://red-gold-socket.herokuapp.com
+  cookie_root_domain: .social.monitalks.io
+  internal_gateway: http://openfaas.default.svc.cluster.local:8080/function
+  websocket_server_url: https://ws.social.monitalks.io
+  gateway: https://social.monitalks.io
+  origin: "https://openfaas.social.monitalks.io,https://social.monitalks.io,https://auth.social.monitalks.io"
