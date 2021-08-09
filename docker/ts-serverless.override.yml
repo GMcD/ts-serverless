@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+
+  circles:
+    image: ${REGISTRY}/circles:${TAG_NR}
+  comments:
+    image: ${REGISTRY}/comments:${TAG_NR}
+  gallery:
+    image: ${REGISTRY}/gallery:${TAG_NR}
+  posts:
+    image: ${REGISTRY}/posts:${TAG_NR}
+  user-rels:
+    image: ${REGISTRY}/user-rels:${TAG_NR}
+  votes:
+    image: ${REGISTRY}/votes:${TAG_NR}
+  vang:
+    image: ${REGISTRY}/vang:${TAG_NR}
