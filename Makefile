@@ -31,5 +31,8 @@ login:  	## ECR Docker Login
 
 up:		## Run FaaS up
 up: login
+	# Update micros with new core && code bases
+	./update-micros.sh telar-core
+	./update-micros.sh telar-web
 	echo "Running FaaS up..."
 	faas up --build-arg GO111MODULE=on

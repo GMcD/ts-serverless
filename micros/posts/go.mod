@@ -3,6 +3,7 @@ module github.com/red-gold/ts-serverless/micros/posts
 go 1.16
 
 require (
+	github.com/GMcD/cognito-jwt v0.0.0-20210806015718-8416e465865c
 	github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de
 	github.com/gofiber/adaptor/v2 v2.1.4
 	github.com/gofiber/fiber/v2 v2.10.0

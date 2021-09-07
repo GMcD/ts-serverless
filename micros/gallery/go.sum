@@ -1,4 +1,8 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/GMcD/cognito-jwt v0.0.0-20210806015718-8416e465865c h1:f89fE2vnsAVgn1qg5rvbswtx3JxfnteaLuaLnyP1I00=
+github.com/GMcD/cognito-jwt v0.0.0-20210806015718-8416e465865c/go.mod h1:7sLhWJzH42Qrwe3EjL4tqW0be8o6/KZlnGDb7k5ui/M=
+github.com/MicahParks/keyfunc v0.3.2 h1:pv+bvbuLLhwBImjhOnk3CjK2uNyPnF0CbxlZPJiFHBs=
+github.com/MicahParks/keyfunc v0.3.2/go.mod h1:9gVJUF41JO0J6argCFDhvP7dgpa/vG+nWK3jnxlQSMU=
 github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de h1:jiPEvtW8VT0KwJxRyjW2VAAvlssjj9SfecsQ3Vgv5tk=
 github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de/go.mod h1:uAbpy8G7sjNB4qYdY6ymf5OIQ+TLDPApBYiR0Vc3lhk=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
@@ -159,7 +163,6 @@ golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn
 golang.org/x/net v0.0.0-20200202094626-16171245cfb2/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
 golang.org/x/net v0.0.0-20210226101413-39120d07d75e/go.mod h1:m0MpNAwzfU5UDzcl9v0D8zg8gWTRqZa9RBIspLL5mdg=
 golang.org/x/net v0.0.0-20210226172049-e18ecbb05110/go.mod h1:m0MpNAwzfU5UDzcl9v0D8zg8gWTRqZa9RBIspLL5mdg=
-golang.org/x/net v0.0.0-20210510120150-4163338589ed h1:p9UgmWI9wKpfYmgaV/IZKGdXc5qEK45tDwwwDyjS26I=
 golang.org/x/net v0.0.0-20210510120150-4163338589ed/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20190412183630-56d357773e84/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
