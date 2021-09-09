@@ -1,8 +1,8 @@
 package models
 
 import (
+	"github.com/GMcD/telar-web/constants"
 	uuid "github.com/gofrs/uuid"
-	"github.com/red-gold/telar-web/constants"
 )
 
 type UserProfileModel struct {
