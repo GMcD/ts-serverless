@@ -1,7 +1,7 @@
 module github.com/red-gold/ts-serverless/micros/posts
 
 replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v0.1.18
-replace github.com/red-gold/ts-serverless v0.1.33 => github.com/GMcD/ts-serverless v0.1.34
+replace github.com/red-gold/ts-serverless v0.1.33 => github.com/GMcD/ts-serverless v0.1.35
 
 go 1.16
 

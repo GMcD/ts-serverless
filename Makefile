@@ -26,6 +26,11 @@ commit:		## Short hand for Commit
 fork:		## Short hand for Commit to Fork Remote
 	git add . ; git commit -m ${ARGUMENT}; git push fork HEAD:master 
 
+tag:		## Tag a Release
+tag: fork
+	git tag $${RELEASE_TAG} -am ${ARGUMENT}
+	git push fork HEAD:master --tags 
+
 login:  	## ECR Docker Login
 	@ aws ecr get-login-password --region $${AWS_REGION} | docker login --username AWS --password-stdin $${AWS_ACCOUNT_ID}.dkr.ecr.$${AWS_REGION}.amazonaws.com
 	@ AWS_ACCOUNT_ID=$$(aws sts get-caller-identity --output text --query 'Account'); \
