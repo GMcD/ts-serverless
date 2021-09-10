@@ -4,7 +4,7 @@ environment:
   db_type: mongo
   debug: "true"
   header_cookie_name: he
-  org_avatar: https://avatars3.githubusercontent.com/u/43268620
+  org_avatar: https://www.prod.monitalks.io/icon-512x512.png
   org_name: Moni Talks
   payload_cookie_name: pa
   phone_source_number: "0123456"

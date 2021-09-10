@@ -23,6 +23,9 @@ help:		## Show this help.
 commit:		## Short hand for Commit
 	git add .; git commit -m ${ARGUMENT}; git push
 
+fork:		## Short hand for Commit to Fork Remote
+	git add . ; git commit -m ${ARGUMENT}; git push fork HEAD:master 
+
 login:  	## ECR Docker Login
 	@ aws ecr get-login-password --region $${AWS_REGION} | docker login --username AWS --password-stdin $${AWS_ACCOUNT_ID}.dkr.ecr.$${AWS_REGION}.amazonaws.com
 	@ AWS_ACCOUNT_ID=$$(aws sts get-caller-identity --output text --query 'Account'); \

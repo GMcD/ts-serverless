@@ -1,6 +1,6 @@
 environment:
-  cookie_root_domain: .social.monitalks.io
-  internal_gateway: http://openfaas.default.svc.cluster.local:8080/function
+  cookie_root_domain: .prod.monitalks.io
+  gateway: https://openfaas.prod.monitalks.io
+  internal_gateway: https://openfaas.prod.monitalks.io/function
   websocket_server_url: https://ws.social.monitalks.io
-  gateway: https://social.monitalks.io
-  origin: "https://openfaas.social.monitalks.io,https://social.monitalks.io,https://auth.social.monitalks.io"
+  origin: "https://openfaas.prod.monitalks.io,https://social.prod.monitalks.io"
