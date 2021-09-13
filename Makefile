@@ -20,15 +20,21 @@ ARGUMENT  := $(word 1,${CMD_ARGS})
 help:		## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+stack:		## Update ECR tags in stack.yml
+	awk -F "." '/354455067292/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/354455067292/ { print }' stack.yml > .stack.yml && mv .stack.yml stack.yml
+
 commit:		## Short hand for Commit
 	git add .; git commit -m ${ARGUMENT}; git push
 
 fork:		## Short hand for Commit to Fork Remote
+fork: stack
 	git add . ; git commit -m ${ARGUMENT}; git push fork HEAD:master 
 
 tag:		## Tag a Release
 tag: fork
-	git tag $${RELEASE_TAG} -am ${ARGUMENT}
+	git merge main && \
+	npm --no-git-tag-version version patch && \
+	git tag v$$(cat package.json | jq -j '.version') -am ${ARGUMENT} && \
 	git push fork HEAD:master --tags 
 
 login:  	## ECR Docker Login
