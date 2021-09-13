@@ -33,6 +33,10 @@ func SetupRoutes(app *fiber.App) {
 		return authhmac.New(authhmac.Config{
 			Next:          Next,
 			PayloadSecret: *config.AppConfig.PayloadSecret,
+			Authorizer: func(bytesIn []byte, encodedHash string) error {
+				_, err := verify.VerifyJWT(encodedHash)
+				return err
+			},
 		})
 	}
 

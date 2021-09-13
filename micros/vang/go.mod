@@ -1,6 +1,6 @@
 module github.com/red-gold/ts-serverless/micros/vang
 
-replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v0.1.18
+replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v0.1.31
 replace github.com/red-gold/ts-serverless v0.1.33 => github.com/GMcD/ts-serverless v0.1.35
 
 go 1.15
@@ -12,6 +12,6 @@ require (
 	github.com/gofiber/fiber/v2 v2.10.0
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/red-gold/telar-core v0.1.16
-	github.com/GMcD/telar-web v0.1.19
+	github.com/GMcD/telar-web v0.1.88
 	github.com/red-gold/ts-serverless v0.1.33
 )

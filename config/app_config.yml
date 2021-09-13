@@ -15,3 +15,4 @@ environment:
   signature_cookie_name: si
   smtp_email: smtp.gmail.com:587
   write_timeout: 10s
+  COGNITO_USERPOOL_ID: eu-west-2_hziTDjp83
