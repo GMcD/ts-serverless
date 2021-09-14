@@ -32,10 +32,12 @@ fork: stack
 
 tag:		## Tag a Release
 tag: fork
+	git checkout gmcd && \
 	git merge main && \
 	npm --no-git-tag-version version patch && \
 	git tag v$$(cat package.json | jq -j '.version') -am ${ARGUMENT} && \
-	git push fork HEAD:master --tags 
+	git push fork HEAD:master --tags && \
+	git checkout main
 
 login:  	## ECR Docker Login
 	@ aws ecr get-login-password --region $${AWS_REGION} | docker login --username AWS --password-stdin $${AWS_ACCOUNT_ID}.dkr.ecr.$${AWS_REGION}.amazonaws.com

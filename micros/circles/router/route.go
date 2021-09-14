@@ -33,10 +33,7 @@ func SetupRoutes(app *fiber.App) {
 		return authhmac.New(authhmac.Config{
 			Next:          Next,
 			PayloadSecret: *config.AppConfig.PayloadSecret,
-			Authorizer: func(bytesIn []byte, encodedHash string) error {
-				_, err := verify.VerifyJWT(encodedHash)
-				return err
-			},
+			}
 		})
 	}
 
@@ -45,8 +42,10 @@ func SetupRoutes(app *fiber.App) {
 		if hmacWithCookie {
 			Next = func(c *fiber.Ctx) bool {
 				if c.Get(types.HeaderHMACAuthenticate) != "" {
+					log.Info("HMAC present and accounted for...")
 					return true
 				}
+				log.Info("HMAC absent..."
 				return false
 			}
 		}
