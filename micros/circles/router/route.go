@@ -6,6 +6,8 @@
 package router
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/red-gold/telar-core/config"
 	"github.com/red-gold/telar-core/middleware/authcookie"
@@ -25,15 +27,16 @@ func SetupRoutes(app *fiber.App) {
 		if hmacWithCookie {
 			Next = func(c *fiber.Ctx) bool {
 				if c.Get(types.HeaderHMACAuthenticate) != "" {
+					log.Println("Have HMAC, returning FALSE...")
 					return false
 				}
+				log.Println("No HMAC, returning TRUE...")
 				return true
 			}
 		}
 		return authhmac.New(authhmac.Config{
 			Next:          Next,
 			PayloadSecret: *config.AppConfig.PayloadSecret,
-			}
 		})
 	}
 
@@ -42,10 +45,10 @@ func SetupRoutes(app *fiber.App) {
 		if hmacWithCookie {
 			Next = func(c *fiber.Ctx) bool {
 				if c.Get(types.HeaderHMACAuthenticate) != "" {
-					log.Info("HMAC present and accounted for...")
+					log.Println("HMAC present and accounted for...")
 					return true
 				}
-				log.Info("HMAC absent..."
+				log.Println("HMAC absent...")
 				return false
 			}
 		}
