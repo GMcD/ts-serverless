@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"strings"
 
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/config"
@@ -13,6 +14,9 @@ import (
 	"github.com/red-gold/telar-core/utils"
 	dto "github.com/red-gold/ts-serverless/micros/posts/dto"
 	"github.com/red-gold/ts-serverless/micros/posts/models"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // PostService handlers with injected dependencies
@@ -190,7 +194,13 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 
 	filter := make(map[string]interface{})
 	if search != "" {
-		filter["$text"] = coreData.SearchOperator{Search: search}
+		// filter["$text"] = coreData.SearchOperator{Search: search}
+		terms := search.split(" ")
+		regexp := strings.Join(terms, "|")
+		filter["$and"] = bson.A{
+			bson.D{{"body", primitive.Regex{Pattern: regexp, Options: "i"}}},
+			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
+		}
 	}
 	if ownerUserIds != nil && len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
@@ -215,7 +225,13 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 
 	filter := make(map[string]interface{})
 	if search != "" {
-		filter["$text"] = coreData.SearchOperator{Search: search}
+		//filter["$text"] = coreData.SearchOperator{Search: search}
+		terms := search.split(" ")
+		regexp := strings.Join(terms, "|")
+		filter["$and"] = bson.A{
+			bson.D{{"body", primitive.Regex{Pattern: regexp, Options: "i"}}},
+			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
+		}
 	}
 	if ownerUserIds != nil && len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
