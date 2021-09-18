@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	dto "github.com/GMcD/ts-serverless/micros/posts/dto"
+	"github.com/GMcD/ts-serverless/micros/posts/models"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/config"
 	coreData "github.com/red-gold/telar-core/data"
@@ -12,8 +14,6 @@ import (
 	mongoRepo "github.com/red-gold/telar-core/data/mongodb"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/utils"
-	dto "github.com/red-gold/ts-serverless/micros/posts/dto"
-	"github.com/red-gold/ts-serverless/micros/posts/models"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/posts/database"
+	domain "github.com/GMcD/ts-serverless/micros/posts/dto"
+	models "github.com/GMcD/ts-serverless/micros/posts/models"
+	service "github.com/GMcD/ts-serverless/micros/posts/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/posts/database"
-	domain "github.com/red-gold/ts-serverless/micros/posts/dto"
-	models "github.com/red-gold/ts-serverless/micros/posts/models"
-	service "github.com/red-gold/ts-serverless/micros/posts/services"
 )
 
 // CreatePostHandle handle create a new post

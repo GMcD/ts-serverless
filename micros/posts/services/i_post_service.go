@@ -1,10 +1,10 @@
 package service
 
 import (
+	dto "github.com/GMcD/ts-serverless/micros/posts/dto"
+	"github.com/GMcD/ts-serverless/micros/posts/models"
 	uuid "github.com/gofrs/uuid"
 	repo "github.com/red-gold/telar-core/data"
-	dto "github.com/red-gold/ts-serverless/micros/posts/dto"
-	"github.com/red-gold/ts-serverless/micros/posts/models"
 )
 
 type PostService interface {

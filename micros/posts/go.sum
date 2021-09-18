@@ -1,6 +1,12 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/GMcD/cognito-jwt v0.0.0-20210806015718-8416e465865c h1:f89fE2vnsAVgn1qg5rvbswtx3JxfnteaLuaLnyP1I00=
 github.com/GMcD/cognito-jwt v0.0.0-20210806015718-8416e465865c/go.mod h1:7sLhWJzH42Qrwe3EjL4tqW0be8o6/KZlnGDb7k5ui/M=
+github.com/GMcD/telar-core v0.1.32 h1:tdrWfcSpTam6q0GVvRD6wE/lv8eVE9lUCNvMrIu1LL4=
+github.com/GMcD/telar-core v0.1.32/go.mod h1:bmkWWp5lamNBfLvQVAFeEmUQ3dJ1SFD+6l0lUJvMbpA=
+github.com/GMcD/telar-web v0.1.88 h1:/2FuBuf6upBep7dCktOnGiwiMqvJP9zIy2aEBchZI+c=
+github.com/GMcD/telar-web v0.1.88/go.mod h1:1Vad/rz367iKDjWiruUM1J8tYu5UxmX5sVgy8FWAzVc=
+github.com/GMcD/ts-serverless v0.1.40 h1:5ig7w8JtY062ImL3J6rvmpswVNlDqRxd3J4zwf4hYFk=
+github.com/GMcD/ts-serverless v0.1.40/go.mod h1:680rztOH3szmqWl25cfFZVjpzbEXWBDqAR5LcIvrKBo=
 github.com/MicahParks/keyfunc v0.3.2 h1:pv+bvbuLLhwBImjhOnk3CjK2uNyPnF0CbxlZPJiFHBs=
 github.com/MicahParks/keyfunc v0.3.2/go.mod h1:9gVJUF41JO0J6argCFDhvP7dgpa/vG+nWK3jnxlQSMU=
 github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de h1:jiPEvtW8VT0KwJxRyjW2VAAvlssjj9SfecsQ3Vgv5tk=
@@ -106,12 +112,6 @@ github.com/plivo/plivo-go v5.5.1+incompatible/go.mod h1:OhnI9crdl6O+D94Lp1lvuwJo
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/red-gold/telar-core v0.1.10/go.mod h1:JdeL5OLMsNUspxjoxM4b7DDmiEDHj9MRZuuw8QO8ui4=
-github.com/red-gold/telar-core v0.1.16 h1:qqhNBP5R+DpqtAsTjYU7CFfV4JVSXD3dZZASYOdrSVg=
-github.com/red-gold/telar-core v0.1.16/go.mod h1:bmkWWp5lamNBfLvQVAFeEmUQ3dJ1SFD+6l0lUJvMbpA=
-github.com/red-gold/telar-web v0.1.65 h1:3EemjUFCR6CqzMG1JXac7MyEcqsCrC5o35gEXk72DcM=
-github.com/red-gold/telar-web v0.1.65/go.mod h1:D3qFm5+cU5XWmlmRbms2LfkXgnM4sy4EJmeOTlYsyFg=
-github.com/red-gold/ts-serverless v0.1.33 h1:RQNY5DFJCBTYsUGV103w0hmeMKaeQjbjRxKOlmY1yr8=
-github.com/red-gold/ts-serverless v0.1.33/go.mod h1:J/60CaiVd81lYAxTSiwMOb0Db0FppG+Lyo87U1rcYAM=
 github.com/rogpeppe/go-internal v1.1.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.2.2/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=

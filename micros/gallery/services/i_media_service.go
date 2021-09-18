@@ -1,9 +1,9 @@
 package service
 
 import (
+	dto "github.com/GMcD/ts-serverless/micros/gallery/dto"
 	uuid "github.com/gofrs/uuid"
 	repo "github.com/red-gold/telar-core/data"
-	dto "github.com/red-gold/ts-serverless/micros/gallery/dto"
 )
 
 type MediaService interface {

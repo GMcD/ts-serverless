@@ -6,12 +6,12 @@
 package router
 
 import (
+	"github.com/GMcD/ts-serverless/micros/user-rels/handlers"
 	"github.com/gofiber/fiber/v2"
 	"github.com/red-gold/telar-core/config"
 	"github.com/red-gold/telar-core/middleware/authcookie"
 	"github.com/red-gold/telar-core/middleware/authhmac"
 	"github.com/red-gold/telar-core/types"
-	"github.com/red-gold/ts-serverless/micros/user-rels/handlers"
 
 	"github.com/GMcD/cognito-jwt/verify"
 )

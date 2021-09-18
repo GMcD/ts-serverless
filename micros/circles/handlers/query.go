@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/circles/database"
+	service "github.com/GMcD/ts-serverless/micros/circles/services"
 	"github.com/gofiber/fiber/v2"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/pkg/parser"
 	"github.com/red-gold/telar-core/types"
 	utils "github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/circles/database"
-	service "github.com/red-gold/ts-serverless/micros/circles/services"
 )
 
 type CircleQueryModel struct {

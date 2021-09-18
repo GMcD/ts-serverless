@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/user-rels/database"
+	domain "github.com/GMcD/ts-serverless/micros/user-rels/dto"
+	socialModels "github.com/GMcD/ts-serverless/micros/user-rels/models"
+	service "github.com/GMcD/ts-serverless/micros/user-rels/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/user-rels/database"
-	domain "github.com/red-gold/ts-serverless/micros/user-rels/dto"
-	socialModels "github.com/red-gold/ts-serverless/micros/user-rels/models"
-	service "github.com/red-gold/ts-serverless/micros/user-rels/services"
 )
 
 // CreateUserRelHandle handle create a new userRel

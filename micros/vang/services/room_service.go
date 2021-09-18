@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 
+	dto "github.com/GMcD/ts-serverless/micros/vang/dto"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/config"
 	coreData "github.com/red-gold/telar-core/data"
@@ -10,7 +11,6 @@ import (
 	"github.com/red-gold/telar-core/data/mongodb"
 	mongoRepo "github.com/red-gold/telar-core/data/mongodb"
 	"github.com/red-gold/telar-core/utils"
-	dto "github.com/red-gold/ts-serverless/micros/vang/dto"
 )
 
 // RoomService handlers with injected dependencies

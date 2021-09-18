@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 
+	models "github.com/GMcD/ts-serverless/micros/posts/models"
 	"github.com/alexellis/hmac"
 	uuid "github.com/gofrs/uuid"
 	coreConfig "github.com/red-gold/telar-core/config"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	models "github.com/red-gold/ts-serverless/micros/posts/models"
 )
 
 const contentMaxLength = 20

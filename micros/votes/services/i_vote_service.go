@@ -1,9 +1,9 @@
 package service
 
 import (
+	dto "github.com/GMcD/ts-serverless/micros/votes/dto"
 	uuid "github.com/gofrs/uuid"
 	coreData "github.com/red-gold/telar-core/data"
-	dto "github.com/red-gold/ts-serverless/micros/votes/dto"
 )
 
 type VoteService interface {

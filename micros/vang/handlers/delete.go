@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/vang/database"
+	service "github.com/GMcD/ts-serverless/micros/vang/services"
 	"github.com/gofiber/fiber/v2"
 	uuid "github.com/gofrs/uuid"
 	log "github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/vang/database"
-	service "github.com/red-gold/ts-serverless/micros/vang/services"
 )
 
 // DeleteMessageHandle handle delete a Message

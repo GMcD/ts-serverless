@@ -12,7 +12,7 @@ import (
 	"syscall"
 	"time"
 
-	function "github.com/red-gold/ts-serverless/micros/__micro_name"
+	function "github.com/GMcD/ts-serverless/micros/__micro_name"
 )
 
 var (

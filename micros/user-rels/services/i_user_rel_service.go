@@ -1,8 +1,8 @@
 package service
 
 import (
+	dto "github.com/GMcD/ts-serverless/micros/user-rels/dto"
 	uuid "github.com/gofrs/uuid"
-	dto "github.com/red-gold/ts-serverless/micros/user-rels/dto"
 )
 
 type UserRelService interface {
