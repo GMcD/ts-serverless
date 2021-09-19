@@ -6,7 +6,7 @@ go 1.16
 
 require (
 	github.com/GMcD/cognito-jwt v0.0.0-20210806015718-8416e465865c
-	github.com/GMcD/ts-serverless v0.1.46
+	github.com/GMcD/ts-serverless v0.1.47
 	github.com/gofiber/adaptor/v2 v2.1.4
 	github.com/gofiber/fiber/v2 v2.10.0
 	github.com/gofrs/uuid v4.0.0+incompatible
