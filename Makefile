@@ -20,10 +20,16 @@ ARGUMENT  := $(word 1,${CMD_ARGS})
 help:		## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-stack:		## Update ECR tags in stack.yml
+stack:		## Update ECR tags in stack.yml on main
+	git checkout main && \
+	if (( $$(git status --porcelain | wc -l) > 0 )); then \
+	    printf "$${GREEN}Module $${RED}ts-serverless$${GREEN} has changes, run $${CYAN}make commit <message>$${GREEN} first.$${NC}\n"; \
+	    exit 1; \
+	fi && \
 	awk -F "." '/354455067292/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/354455067292/ { print }' stack.yml > .stack.yml && mv .stack.yml stack.yml
 
-bump:
+bump:		## Update go mod version numbers on main
+bump: stack
 	npm --no-git-tag-version version patch && \
 	for mod in $$(find ./micros -name \*.mod); do \
 		awk -F "1." '/ts-serverless/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/ts-serverless/ { print }' $$mod > $${mod}.tmp && mv $${mod}.tmp $$mod; \
@@ -32,19 +38,14 @@ bump:
 commit:		## Short hand for Commit
 	git add .; git commit -m ${ARGUMENT}; git push
 
-fork:		## Short hand for Commit to Fork Remote
-fork: stack
+fork:		## Short hand for Commit main to Fork Remote
+fork: bump
+	git checkout gmcd && \
+	git merge main && \
 	git add . ; git commit -m ${ARGUMENT}; git push fork HEAD:master 
 
 tag:		## Tag a Release
-tag: fork
-	if (( $$(git status --porcelain | wc -l) > 0 )); then \
-        printf "S${RED}ts-serverless${GREEN} has changes, run S${CYAN}make commit <message>S${GREEN} first.S${NC}\n"; \
-        exit 1 \
-    fi && \
-	git checkout gmcd && \
-	git merge main && \
-	make bump && \
+tag: fork 
 	git tag v$$(cat package.json | jq -j '.version') -am ${ARGUMENT} && \
 	git push fork HEAD:master --tags && \
 	git checkout main
