@@ -197,9 +197,8 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 		// filter["$text"] = coreData.SearchOperator{Search: search}
 		terms := strings.Split(search, " ")
 		regexp := strings.Join(terms, "|")
-		filter["$and"] = bson.A{
+		filter["$or"] = bson.A{
 			bson.D{{"body", primitive.Regex{Pattern: regexp, Options: "i"}}},
-			bson.D{{"tags", primitive.Regex{Pattern: regexp, Options: "i"}}},
 			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
 		}
 	}
@@ -229,9 +228,8 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 		//filter["$text"] = coreData.SearchOperator{Search: search}
 		terms := strings.Split(search, " ")
 		regexp := strings.Join(terms, "|")
-		filter["$and"] = bson.A{
+		filter["$or"] = bson.A{
 			bson.D{{"body", primitive.Regex{Pattern: regexp, Options: "i"}}},
-			bson.D{{"tags", primitive.Regex{Pattern: regexp, Options: "i"}}},
 			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
 		}
 	}
