@@ -23,6 +23,12 @@ help:		## Show this help.
 stack:		## Update ECR tags in stack.yml
 	awk -F "." '/354455067292/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/354455067292/ { print }' stack.yml > .stack.yml && mv .stack.yml stack.yml
 
+bump:
+	npm --no-git-tag-version version patch && \
+	for mod in $$(find ./micros -name \*.mod); do \
+		awk -F "1." '/ts-serverless/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/ts-serverless/ { print }' $$mod > $${mod}.tmp && mv $${mod}.tmp $$mod; \
+	done
+
 commit:		## Short hand for Commit
 	git add .; git commit -m ${ARGUMENT}; git push
 
@@ -32,9 +38,13 @@ fork: stack
 
 tag:		## Tag a Release
 tag: fork
+	if (( $$(git status --porcelain | wc -l) > 0 )); then \
+        printf "S${RED}ts-serverless${GREEN} has changes, run S${CYAN}make commit <message>S${GREEN} first.S${NC}\n"; \
+        exit 1 \
+    fi && \
 	git checkout gmcd && \
 	git merge main && \
-	npm --no-git-tag-version version patch && \
+	make bump && \
 	git tag v$$(cat package.json | jq -j '.version') -am ${ARGUMENT} && \
 	git push fork HEAD:master --tags && \
 	git checkout main
