@@ -34,6 +34,7 @@ bump: stack
 	for mod in $$(find ./micros -name \*.mod); do \
 		awk -F "1." '/ts-serverless/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/ts-serverless/ { print }' $$mod > $${mod}.tmp && mv $${mod}.tmp $$mod; \
 	done
+	git add . ; git commit -m Version-$$(cat package.json | jq -j '.version'); git push
 
 commit:		## Short hand for Commit
 	git add .; git commit -m ${ARGUMENT}; git push
