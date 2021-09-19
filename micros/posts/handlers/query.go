@@ -38,6 +38,7 @@ func QueryPostHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
 	}
 
+	log.Info("Querying Posts for '%s' from/by '%s'", query.Search, query.Owner)
 	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())

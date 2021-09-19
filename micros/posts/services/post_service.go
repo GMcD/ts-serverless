@@ -166,6 +166,8 @@ func (s PostServiceImpl) FindPostsIncludeProfile(filter interface{}, limit int64
 
 	pipeline = append(pipeline, lookupOperator, unwindOperator, projectOperator)
 
+	log.Info("FindPostsIncludeProfile pipeline : %s", pipeline)
+
 	result := <-s.PostRepo.Aggregate(postCollectionName, pipeline)
 
 	defer result.Close()
@@ -210,7 +212,7 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 	if postTypeId > 0 {
 		filter["postTypeId"] = postTypeId
 	}
-	fmt.Println(filter)
+	log.Info("FindPostList filter : %s", filter)
 	result, err := s.FindPostList(filter, limit, skip, sortMap)
 
 	return result, err
@@ -242,6 +244,7 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 		filter["postTypeId"] = postTypeId
 	}
 
+	log.Info("FindPostsIncludeProfile filter : %s", filter)
 	result, err := s.FindPostsIncludeProfile(filter, limit, skip, sortMap)
 
 	return result, err
