@@ -56,6 +56,8 @@ func SetupRoutes(app *fiber.App) {
 	hmacCookieHandlers := []func(*fiber.Ctx) error{authHMACMiddleware(true), authCookieMiddleware(true)}
 
 	// Routers
+
+	// Posting to userProfiles
 	app.Post("/", append(hmacCookieHandlers, handlers.CreatePostHandle)...)
 	app.Post("/index", authHMACMiddleware(false), handlers.InitPostIndexHandle)
 	app.Put("/", append(hmacCookieHandlers, handlers.UpdatePostHandle)...)
@@ -69,4 +71,9 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/", append(hmacCookieHandlers, handlers.QueryPostHandle)...)
 	app.Get("/:postId", append(hmacCookieHandlers, handlers.GetPostHandle)...)
 	app.Get("/urlkey/:urlkey", append(hmacCookieHandlers, handlers.GetPostByURLKeyHandle)...)
+
+	// Posting to collections
+
+	app.Post("/collectives/", append(hmacCookieHandlers, handlers.CreateCollectivesPostHandle)...)
+	app.Put("/collectives/profile", append(hmacCookieHandlers, handlers.UpdateCollectivesPostProfileHandle)...)
 }

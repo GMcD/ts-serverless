@@ -303,3 +303,32 @@ func UpdatePostProfileHandle(c *fiber.Ctx) error {
 	return c.SendStatus(http.StatusOK)
 
 }
+
+// Deprecated: UpdateCollectivesPostProfileHandle
+func UpdateCollectivesPostProfileHandle(c *fiber.Ctx) error {
+
+	// Create service
+	postService, serviceErr := service.NewPostService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewPostService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/postService", "Error happened while creating postService!"))
+	}
+
+	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
+	if !ok {
+		log.Error("[UpdateCollectivesPostProfileHandle] Can not get current user")
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("invalidCurrentUser",
+			"Can not get current user"))
+	}
+
+	err := postService.UpdateCollectivesPostProfile(currentUser.UserID, currentUser.DisplayName, currentUser.Avatar)
+	if err != nil {
+		errorMessage := fmt.Sprintf("[UpdateCollectivesPostProfile] Update Post Error %s", err.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/updatePost", "Error happened while updating post!"))
+
+	}
+
+	return c.SendStatus(http.StatusOK)
+
+}

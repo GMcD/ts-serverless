@@ -115,3 +115,24 @@ func getUserProfileByID(userID uuid.UUID) (*models.UserProfileModel, error) {
 	}
 	return &foundProfile, nil
 }
+
+// getCollectivesByID
+
+func getCollectivesByID(collectiveID uuid.UUID) (*models.CollectivesModel, error) {
+	collectiveURL := fmt.Sprintf("/collectives/dto/id/%s", userID.String())
+	foundCollectivesData, err := functionCall(http.MethodGet, []byte(""), collectivesURL, nil)
+	if err != nil {
+		if err == NotFoundHTTPStatusError {
+			return nil, nil
+		}
+		log.Error("functionCall (%s) -  %s", collectiveURL, err.Error())
+		return nil, fmt.Errorf("getCollectivesByID/functionCall")
+	}
+	var foundCollectives models.UserCollectivesModel
+	err = json.Unmarshal(foundCollectivesData, &foundCollectives)
+	if err != nil {
+		log.Error("Unmarshal foundCollectives -  %s", err.Error())
+		return nil, fmt.Errorf("getCollectivesByID/unmarshal")
+	}
+	return &foundCollectives, nil
+}
