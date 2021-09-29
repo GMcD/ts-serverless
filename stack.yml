@@ -2,7 +2,7 @@ functions:
   circles:
     lang: golang-middleware
     handler: ./micros/circles
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/circles:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/circles:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
@@ -23,7 +23,7 @@ functions:
   comments:
     lang: golang-middleware
     handler: ./micros/comments
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/comments:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/comments:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
@@ -44,7 +44,7 @@ functions:
   media:
     lang: golang-middleware
     handler: ./micros/gallery
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/gallery:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/gallery:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
@@ -65,7 +65,7 @@ functions:
   posts:
     lang: golang-middleware
     handler: ./micros/posts
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/posts:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/posts:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
@@ -86,7 +86,7 @@ functions:
   user-rels:
     lang: golang-middleware
     handler: ./micros/user-rels
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/user-rels:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/user-rels:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
@@ -107,7 +107,7 @@ functions:
   votes:
     lang: golang-middleware
     handler: ./micros/votes
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/votes:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/votes:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
@@ -128,7 +128,7 @@ functions:
   vang:
     lang: golang-middleware
     handler: ./micros/vang
-    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/vang:v2.2.113
+    image: 354455067292.dkr.ecr.eu-west-2.amazonaws.com/telar/vang:v2.2.114
     fprocess: ""
     environment: {}
     secrets:
