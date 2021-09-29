@@ -89,6 +89,8 @@ func functionCall(method string, bytesReq []byte, url string, header map[string]
 		}
 	}
 
+	utils.AddPolicies(httpReq)
+
 	c := http.Client{}
 	res, reqErr := c.Do(httpReq)
 	fmt.Printf("\nRes: %v\n", res)

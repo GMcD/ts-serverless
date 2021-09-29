@@ -66,11 +66,15 @@ func functionCall(method string, bytesReq []byte, url string, header map[string]
 	httpReq.Header.Set("Content-type", "application/json")
 	fmt.Printf("\ndigest: %s, header: %v \n", "sha1="+hex.EncodeToString(digest), types.HeaderHMACAuthenticate)
 	httpReq.Header.Add(types.HeaderHMACAuthenticate, "sha1="+hex.EncodeToString(digest))
+
 	if header != nil {
 		for k, v := range header {
 			httpReq.Header[k] = v
 		}
 	}
+
+	utils.AddPolicies(httpReq)
+
 	c := http.Client{}
 	res, reqErr := c.Do(httpReq)
 	fmt.Printf("\nRes: %v\n", res)
