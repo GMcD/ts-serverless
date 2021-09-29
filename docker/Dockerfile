@@ -45,10 +45,10 @@ ARG GOFLAGS=""
 
 WORKDIR /go/src/handler/function
 
-RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go test ./... -cover
+RUN GOPRIVATE=github.com/GMcD GOOS=${TARGETOS} GOARCH=${TARGETARCH} go test ./... -cover
 
 WORKDIR /go/src/handler
-RUN CGO_ENABLED=${CGO_ENABLED} GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
+RUN GOPRIVATE=github.com/GMcD CGO_ENABLED=${CGO_ENABLED} GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
     go build --ldflags "-s -w" -a -installsuffix cgo -o handler .
 
 FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.13
