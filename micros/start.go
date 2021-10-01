@@ -213,6 +213,37 @@ func getAllConfiguration() *config.Configuration {
 		newCoreConfig.DBType = &dbType
 		log.Printf("[INFO]: Database type information loaded from env.")
 	}
+
+	cognitoUserPool, ok := os.LookupEnv("cognito_user_pool")
+	if ok {
+		newCoreConfig.CognitoUserPool = &cognitoUserPool
+		log.Printf("Cognito User Pool %s loaded from env.", cognitoUserPool)
+	}
+
+	contentSecurityPolicy, ok := os.LookupEnv("content_security_policy")
+	if ok {
+		newCoreConfig.ContentSecurityPolicy = &contentSecurityPolicy
+		log.Printf("Content Security Policy '%s' loaded from env.", contentSecurityPolicy)
+	}
+
+	contentTypeOptions, ok := os.LookupEnv("content_header_options")
+	if ok {
+		newCoreConfig.ContentTypeOptions = &contentTypeOptions
+		log.Printf("Content Header Options '%s' loaded from env.", contentTypeOptions)
+	}
+
+	referrerPolicy, ok := os.LookupEnv("referrer_policy")
+	if ok {
+		newCoreConfig.ReferrerPolicy = &referrerPolicy
+		log.Printf("Referrer Policy '%s' loaded from env.", referrerPolicy)
+	}
+
+	awsRegion, ok := os.LookupEnv("aws_region")
+	if ok {
+		newCoreConfig.AwsRegion = &awsRegion
+		log.Printf("AWS Region '%s' loaded from env.", awsRegion)
+	}
+
 	return &newCoreConfig
 }
 

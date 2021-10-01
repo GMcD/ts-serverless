@@ -77,7 +77,7 @@ func functionCall(method string, bytesReq []byte, url string, header map[string]
 
 	c := http.Client{}
 	res, reqErr := c.Do(httpReq)
-	fmt.Printf("\nRes: %v\n", res)
+	fmt.Printf("\nUrl : %s, Result : %v\n", url, *res)
 	if reqErr != nil {
 		return nil, fmt.Errorf("Error while sending admin check request!: %s", reqErr.Error())
 	}
