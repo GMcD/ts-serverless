@@ -217,25 +217,25 @@ func getAllConfiguration() *config.Configuration {
 	cognitoUserPool, ok := os.LookupEnv("cognito_user_pool")
 	if ok {
 		newCoreConfig.CognitoUserPool = &cognitoUserPool
-		log.Printf("Cognito User Pool %s loaded from env.", cognitoUserPool)
+		log.Printf("[INFO]: Cognito User Pool %s loaded from env.", cognitoUserPool)
 	}
 
 	contentSecurityPolicy, ok := os.LookupEnv("content_security_policy")
 	if ok {
 		newCoreConfig.ContentSecurityPolicy = &contentSecurityPolicy
-		log.Printf("Content Security Policy '%s' loaded from env.", contentSecurityPolicy)
+		log.Printf("[INFO]: Content Security Policy '%s' loaded from env.", contentSecurityPolicy)
 	}
 
-	contentTypeOptions, ok := os.LookupEnv("content_header_options")
+	contentTypeOptions, ok := os.LookupEnv("content_type_options")
 	if ok {
 		newCoreConfig.ContentTypeOptions = &contentTypeOptions
-		log.Printf("Content Header Options '%s' loaded from env.", contentTypeOptions)
+		log.Printf("[INFO]: Content Type Options '%s' loaded from env.", contentTypeOptions)
 	}
 
 	referrerPolicy, ok := os.LookupEnv("referrer_policy")
 	if ok {
 		newCoreConfig.ReferrerPolicy = &referrerPolicy
-		log.Printf("Referrer Policy '%s' loaded from env.", referrerPolicy)
+		log.Printf("[INFO]: Referrer Policy '%s' loaded from env.", referrerPolicy)
 	}
 
 	awsRegion, ok := os.LookupEnv("aws_region")
