@@ -13,7 +13,7 @@ type CreateCollectivesPostModel struct {
 	ViewCount          int64                         `json:"viewCount"`
 	Body               string                        `json:"body"`
 	OwnerUserId        uuid.UUID                     `json:"ownerUserId"`
-	CollectivesOwnerId string                        `json:"collectivesOwnerId", bson:"collectivesOwnerId"`
+	CollectivesOwnerId string                        `json:"collectivesOwnerId" bson:"collectivesOwnerId"`
 	OwnerDisplayName   string                        `json:"ownerDisplayName"`
 	OwnerAvatar        string                        `json:"ownerAvatar"`
 	URLKey             string                        `json:"urlKey"`

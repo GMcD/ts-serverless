@@ -11,7 +11,7 @@ type PostModel struct {
 	Score            int64                         `json:"score" bson:"score"`
 	Votes            map[string]string             `json:"votes" bson:"votes"`
 	ViewCount        int64                         `json:"viewCount" bson:"viewCount"`
-	Body             string                        `json:"body" bson:"body", validate:"max=3000"`
+	Body             string                        `json:"body" bson:"body" validate:"max=3000"`
 	OwnerUserId      uuid.UUID                     `json:"ownerUserId" bson:"ownerUserId"`
 	OwnerDisplayName string                        `json:"ownerDisplayName" bson:"ownerDisplayName"`
 	OwnerAvatar      string                        `json:"ownerAvatar" bson:"ownerAvatar"`
