@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/vang/database"
+	models "github.com/GMcD/ts-serverless/micros/vang/models"
+	service "github.com/GMcD/ts-serverless/micros/vang/services"
 	"github.com/gofiber/fiber/v2"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	utils "github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/vang/database"
-	models "github.com/red-gold/ts-serverless/micros/vang/models"
-	service "github.com/red-gold/ts-serverless/micros/vang/services"
 )
 
 // QueryMessagesHandle handle query on vang

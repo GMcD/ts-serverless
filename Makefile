@@ -20,20 +20,41 @@ ARGUMENT  := $(word 1,${CMD_ARGS})
 help:		## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-commit:		## Short hand for Commit
+stack:		## Update ECR tags in stack.yml on main
+	git checkout main && \
+	if (( $$(git status --porcelain | wc -l) > 0 )); then \
+	    printf "$${GREEN}Module $${RED}ts-serverless$${GREEN} has changes, run $${CYAN}make commit <message>$${GREEN} first.$${NC}\n"; \
+	    exit 1; \
+	fi && \
+	awk -F "." '/354455067292/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/354455067292/ { print }' stack.yml > .stack.yml && mv .stack.yml stack.yml
+
+bump:		## Update go mod version numbers on main
+bump: stack
+	npm --no-git-tag-version version patch && \
+	for mod in $$(find ./micros -name \*.mod); do \
+		awk -F "1." '/ts-serverless v/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/ts-serverless v/ { print }' $$mod > $${mod}.tmp && mv $${mod}.tmp $$mod; \
+	done  && \
+	for micro in $$(ls -d micros/*/); do pushd ./$${micro}; go mod tidy; popd; done && \
+	git add . ; git commit -m Version-$$(cat package.json | jq -j '.version'); git push
+
+commit:		## Short hand for Commit to prod
 	git add .; git commit -m ${ARGUMENT}; git push
 
-fork:		## Short hand for Commit to Fork Remote
+fork:		## Short hand for Commit main to Fork Remote
+fork: bump
+	git checkout gmcd && \
+	git merge main && \
 	git add . ; git commit -m ${ARGUMENT}; git push fork HEAD:master 
 
 tag:		## Tag a Release
-tag: fork
-	git checkout gmcd && \
-	git merge main && \
-	npm --no-git-tag-version version patch && \
+tag: fork 
 	git tag v$$(cat package.json | jq -j '.version') -am ${ARGUMENT} && \
 	git push fork HEAD:master --tags && \
 	git checkout main
+
+logs:		## Log Pod ${ARGUMENT} by prefix
+logs:
+	kubectl logs --namespace openfaas-fn $(shell kubectl get pods --namespace openfaas-fn -o=jsonpath='{.items[*].metadata.name}' -l faas_function=${ARGUMENT})
 
 login:  	## ECR Docker Login
 	@ aws ecr get-login-password --region $${AWS_REGION} | docker login --username AWS --password-stdin $${AWS_ACCOUNT_ID}.dkr.ecr.$${AWS_REGION}.amazonaws.com
@@ -47,4 +68,4 @@ up: login
 	# ./update-micros.sh telar-core
 	# ./update-micros.sh telar-web
 	echo "Running FaaS up..."
-	faas up --build-arg GO111MODULE=on
+	GOPRIVATE=github.com/GMcD faas up --build-arg GO111MODULE=on

@@ -2,7 +2,10 @@ package service
 
 import (
 	"fmt"
+	"strings"
 
+	dto "github.com/GMcD/ts-serverless/micros/posts/dto"
+	"github.com/GMcD/ts-serverless/micros/posts/models"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/config"
 	coreData "github.com/red-gold/telar-core/data"
@@ -11,8 +14,9 @@ import (
 	mongoRepo "github.com/red-gold/telar-core/data/mongodb"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/utils"
-	dto "github.com/red-gold/ts-serverless/micros/posts/dto"
-	"github.com/red-gold/ts-serverless/micros/posts/models"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // PostService handlers with injected dependencies
@@ -162,6 +166,8 @@ func (s PostServiceImpl) FindPostsIncludeProfile(filter interface{}, limit int64
 
 	pipeline = append(pipeline, lookupOperator, unwindOperator, projectOperator)
 
+	log.Info("FindPostsIncludeProfile pipeline : %s", pipeline)
+
 	result := <-s.PostRepo.Aggregate(postCollectionName, pipeline)
 
 	defer result.Close()
@@ -190,7 +196,13 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 
 	filter := make(map[string]interface{})
 	if search != "" {
-		filter["$text"] = coreData.SearchOperator{Search: search}
+		// filter["$text"] = coreData.SearchOperator{Search: search}
+		terms := strings.Split(search, " ")
+		regexp := strings.Join(terms, "|")
+		filter["$or"] = bson.A{
+			bson.D{{"body", primitive.Regex{Pattern: regexp, Options: "i"}}},
+			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
+		}
 	}
 	if ownerUserIds != nil && len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
@@ -200,7 +212,7 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 	if postTypeId > 0 {
 		filter["postTypeId"] = postTypeId
 	}
-	fmt.Println(filter)
+	log.Info("FindPostList filter : %s", filter)
 	result, err := s.FindPostList(filter, limit, skip, sortMap)
 
 	return result, err
@@ -215,7 +227,13 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 
 	filter := make(map[string]interface{})
 	if search != "" {
-		filter["$text"] = coreData.SearchOperator{Search: search}
+		//filter["$text"] = coreData.SearchOperator{Search: search}
+		terms := strings.Split(search, " ")
+		regexp := strings.Join(terms, "|")
+		filter["$or"] = bson.A{
+			bson.D{{"body", primitive.Regex{Pattern: regexp, Options: "i"}}},
+			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
+		}
 	}
 	if ownerUserIds != nil && len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
@@ -226,6 +244,7 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 		filter["postTypeId"] = postTypeId
 	}
 
+	log.Info("FindPostsIncludeProfile filter : %s", filter)
 	result, err := s.FindPostsIncludeProfile(filter, limit, skip, sortMap)
 
 	return result, err

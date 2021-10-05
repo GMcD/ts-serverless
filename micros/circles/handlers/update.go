@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/circles/database"
+	domain "github.com/GMcD/ts-serverless/micros/circles/dto"
+	service "github.com/GMcD/ts-serverless/micros/circles/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/circles/database"
-	domain "github.com/red-gold/ts-serverless/micros/circles/dto"
-	service "github.com/red-gold/ts-serverless/micros/circles/services"
 )
 
 // UpdateCircleHandle handle create a new circle

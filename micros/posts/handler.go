@@ -4,6 +4,9 @@ import (
 	"context"
 	"net/http"
 
+	micros "github.com/GMcD/ts-serverless/micros"
+	"github.com/GMcD/ts-serverless/micros/posts/database"
+	"github.com/GMcD/ts-serverless/micros/posts/router"
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -13,9 +16,6 @@ import (
 	"github.com/red-gold/telar-core/config"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/utils"
-	micros "github.com/red-gold/ts-serverless/micros"
-	"github.com/red-gold/ts-serverless/micros/posts/database"
-	"github.com/red-gold/ts-serverless/micros/posts/router"
 )
 
 // Cache state
@@ -53,7 +53,7 @@ func init() {
 	app.Use(cors.New(cors.Config{
 		AllowOrigins:     *config.AppConfig.Origin,
 		AllowCredentials: true,
-		AllowHeaders:     "Authorization, Origin, Content-Type, Accept, Access-Control-Allow-Headers, X-Requested-With, X-HTTP-Method-Override, access-control-allow-origin, access-control-allow-headers",
+		AllowHeaders:     "Authorization, uid, email, avatar, displayName, role, tagLine, x-cloud-signature, Origin, Content-Type, Accept, Access-Control-Allow-Headers, X-Requested-With, X-HTTP-Method-Override, access-control-allow-origin, access-control-allow-headers",
 	}))
 	router.SetupRoutes(app)
 

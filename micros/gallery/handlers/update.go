@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/gallery/database"
+	domain "github.com/GMcD/ts-serverless/micros/gallery/dto"
+	models "github.com/GMcD/ts-serverless/micros/gallery/models"
+	service "github.com/GMcD/ts-serverless/micros/gallery/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/gallery/database"
-	domain "github.com/red-gold/ts-serverless/micros/gallery/dto"
-	models "github.com/red-gold/ts-serverless/micros/gallery/models"
-	service "github.com/red-gold/ts-serverless/micros/gallery/services"
 )
 
 // UpdateMediaHandle handle create a new media

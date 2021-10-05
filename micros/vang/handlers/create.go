@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/vang/database"
+	"github.com/GMcD/ts-serverless/micros/vang/dto"
+	models "github.com/GMcD/ts-serverless/micros/vang/models"
+	service "github.com/GMcD/ts-serverless/micros/vang/services"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofrs/uuid"
 	log "github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/vang/database"
-	"github.com/red-gold/ts-serverless/micros/vang/dto"
-	models "github.com/red-gold/ts-serverless/micros/vang/models"
-	service "github.com/red-gold/ts-serverless/micros/vang/services"
 )
 
 // CreateMessageHandle handle create a new vang

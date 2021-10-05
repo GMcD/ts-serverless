@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/posts/database"
+	models "github.com/GMcD/ts-serverless/micros/posts/models"
+	service "github.com/GMcD/ts-serverless/micros/posts/services"
 	"github.com/gofiber/fiber/v2"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/pkg/parser"
 	utils "github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/posts/database"
-	models "github.com/red-gold/ts-serverless/micros/posts/models"
-	service "github.com/red-gold/ts-serverless/micros/posts/services"
 )
 
 type PostQueryModel struct {
@@ -38,6 +38,7 @@ func QueryPostHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
 	}
 
+	log.Info("Querying Posts for '%s' from/by '%s'", query.Search, query.Owner)
 	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())

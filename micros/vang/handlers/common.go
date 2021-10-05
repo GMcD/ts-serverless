@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	models "github.com/GMcD/ts-serverless/micros/vang/models"
 	"github.com/alexellis/hmac"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofrs/uuid"
@@ -15,7 +16,6 @@ import (
 	log "github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	models "github.com/red-gold/ts-serverless/micros/vang/models"
 )
 
 type Action struct {
@@ -86,9 +86,11 @@ func functionCall(method string, bytesReq []byte, url string, header map[string]
 		}
 	}
 
+	utils.AddPolicies(httpReq)
+
 	c := http.Client{}
 	res, reqErr := c.Do(httpReq)
-	fmt.Printf("\nRes: %v\n", res)
+	fmt.Printf("\nUrl : %s, Result : %v\n", url, *res)
 	if reqErr != nil {
 		return nil, fmt.Errorf("Error while sending admin check request!: %s", reqErr.Error())
 	}

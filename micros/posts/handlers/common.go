@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 
+	models "github.com/GMcD/ts-serverless/micros/posts/models"
 	"github.com/alexellis/hmac"
 	uuid "github.com/gofrs/uuid"
 	coreConfig "github.com/red-gold/telar-core/config"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	models "github.com/red-gold/ts-serverless/micros/posts/models"
 )
 
 const contentMaxLength = 20
@@ -66,14 +66,18 @@ func functionCall(method string, bytesReq []byte, url string, header map[string]
 	httpReq.Header.Set("Content-type", "application/json")
 	fmt.Printf("\ndigest: %s, header: %v \n", "sha1="+hex.EncodeToString(digest), types.HeaderHMACAuthenticate)
 	httpReq.Header.Add(types.HeaderHMACAuthenticate, "sha1="+hex.EncodeToString(digest))
+
 	if header != nil {
 		for k, v := range header {
 			httpReq.Header[k] = v
 		}
 	}
+
+	utils.AddPolicies(httpReq)
+
 	c := http.Client{}
 	res, reqErr := c.Do(httpReq)
-	fmt.Printf("\nRes: %v\n", res)
+	fmt.Printf("\nUrl : %s, Result : %v\n", url, *res)
 	if reqErr != nil {
 		return nil, fmt.Errorf("Error while sending admin check request!: %s", reqErr.Error())
 	}

@@ -1,8 +1,8 @@
 package models
 
 import (
+	"github.com/GMcD/ts-serverless/constants"
 	uuid "github.com/gofrs/uuid"
-	"github.com/red-gold/ts-serverless/constants"
 )
 
 type CreatePostModel struct {

@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/comments/database"
+	domain "github.com/GMcD/ts-serverless/micros/comments/dto"
+	models "github.com/GMcD/ts-serverless/micros/comments/models"
+	service "github.com/GMcD/ts-serverless/micros/comments/services"
 	"github.com/gofiber/fiber/v2"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/comments/database"
-	domain "github.com/red-gold/ts-serverless/micros/comments/dto"
-	models "github.com/red-gold/ts-serverless/micros/comments/models"
-	service "github.com/red-gold/ts-serverless/micros/comments/services"
 )
 
 type PostModelNotification struct {

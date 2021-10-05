@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/GMcD/ts-serverless/micros/posts/database"
+	service "github.com/GMcD/ts-serverless/micros/posts/services"
 	"github.com/gofiber/fiber/v2"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/types"
 	"github.com/red-gold/telar-core/utils"
-	"github.com/red-gold/ts-serverless/micros/posts/database"
-	service "github.com/red-gold/ts-serverless/micros/posts/services"
 )
 
 // DeletePostHandle handle delete a post
