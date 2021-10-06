@@ -7,6 +7,7 @@ import (
 
 type Post struct {
 	ObjectId         uuid.UUID                     `json:"objectId" bson:"objectId"`
+	CollectiveId     uuid.UUID                     `json:"collectiveId" bson:"collectiveId"`
 	PostTypeId       int                           `json:"postTypeId" bson:"postTypeId"`
 	Score            int64                         `json:"score" bson:"score"`
 	Votes            map[string]string             `json:"votes" bson:"votes"`
