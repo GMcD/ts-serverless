@@ -7,6 +7,7 @@ import (
 
 type CreateCollectivesPostModel struct {
 	ObjectId         uuid.UUID                     `json:"objectId"`
+	CollectiveId     uuid.UUID                     `json:"collectiveId"`
 	PostTypeId       int                           `json:"postTypeId"`
 	Score            int64                         `json:"score"`
 	Votes            map[string]bool               `json:"votes"`

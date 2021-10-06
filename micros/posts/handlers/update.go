@@ -179,9 +179,9 @@ func IncrementCommentHandle(c *fiber.Ctx) error {
 
 		}
 	} else if model.Count < 0 {
-		err := postService.DecerementCommentCount(model.PostId)
+		err := postService.DecrementCommentCount(model.PostId)
 		if err != nil {
-			errorMessage := fmt.Sprintf("[DecerementCommentCount] Update Post Error %s", err.Error())
+			errorMessage := fmt.Sprintf("[DecrementCommentCount] Update Post Error %s", err.Error())
 			log.Error(errorMessage)
 			return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/updatePost", "Error happened while updating post!"))
 
@@ -316,14 +316,14 @@ func UpdateCollectivesPostProfileHandle(c *fiber.Ctx) error {
 
 	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
 	if !ok {
-		log.Error("[UpdateCollectivesPostProfileHandle] Can not get current user")
+		log.Error("[UpdatePostProfileHandle] Can not get current user")
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("invalidCurrentUser",
 			"Can not get current user"))
 	}
 
-	err := postService.UpdateCollectivesPostProfile(currentUser.UserID, currentUser.DisplayName, currentUser.Avatar)
+	err := postService.UpdatePostProfile(currentUser.UserID, currentUser.DisplayName, currentUser.Avatar)
 	if err != nil {
-		errorMessage := fmt.Sprintf("[UpdateCollectivesPostProfile] Update Post Error %s", err.Error())
+		errorMessage := fmt.Sprintf("[UpdatePostProfile] Update Post Error %s", err.Error())
 		log.Error(errorMessage)
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/updatePost", "Error happened while updating post!"))
 

@@ -132,7 +132,7 @@ func getCollectivesByID(collectiveID uuid.UUID) (*models.CollectivesModel, error
 		log.Error("functionCall (%s) -  %s", collectiveURL, err.Error())
 		return nil, fmt.Errorf("getCollectivesByID/functionCall")
 	}
-	var foundCollectives models.UserCollectivesModel
+	var foundCollectives models.CollectivesModel
 	err = json.Unmarshal(foundCollectivesData, &foundCollectives)
 	if err != nil {
 		log.Error("Unmarshal foundCollectives -  %s", err.Error())
