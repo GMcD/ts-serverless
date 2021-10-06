@@ -41,14 +41,14 @@ func StringRand(length int) string {
 	return StringWithCharset(length, charset)
 }
 
-// generatPostURLKey
-func generatPostURLKey(socialName, body, postId string) string {
-	contetn := body
+// generatePostURLKey
+func generatePostURLKey(socialName, body, postId string) string {
+	content := body
 	if contentMaxLength <= len(body) {
-		contetn = body[:contentMaxLength]
+		content = body[:contentMaxLength]
 	}
 
-	return strings.ToLower(fmt.Sprintf("%s_%s-post-%s-%s", socialName, strings.ReplaceAll(contetn, " ", "-"), strings.Split(postId, "-")[0], StringRand(5)))
+	return strings.ToLower(fmt.Sprintf("%s_%s-post-%s-%s", socialName, strings.ReplaceAll(content, " ", "-"), strings.Split(postId, "-")[0], StringRand(5)))
 }
 
 // functionCall send request to another function/microservice using cookie validation
@@ -123,8 +123,8 @@ func getUserProfileByID(userID uuid.UUID) (*models.UserProfileModel, error) {
 // getCollectivesByID
 
 func getCollectivesByID(collectiveID uuid.UUID) (*models.CollectivesModel, error) {
-	collectiveURL := fmt.Sprintf("/collectives/dto/id/%s", userID.String())
-	foundCollectivesData, err := functionCall(http.MethodGet, []byte(""), collectivesURL, nil)
+	collectiveURL := fmt.Sprintf("/collective/dto/id/%s", collectiveID.String())
+	foundCollectivesData, err := functionCall(http.MethodGet, []byte(""), collectiveURL, nil)
 	if err != nil {
 		if err == NotFoundHTTPStatusError {
 			return nil, nil

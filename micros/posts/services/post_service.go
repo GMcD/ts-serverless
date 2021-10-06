@@ -466,14 +466,32 @@ func (s PostServiceImpl) Increment(objectId uuid.UUID, field string, value int) 
 	return s.UpdatePost(filter, incOperator)
 }
 
-// IncerementCommentCount increment comment count of post
+// Decrement decrement a post field
+func (s PostServiceImpl) Decrement(objectId uuid.UUID, field string, value int) error {
+
+	filter := struct {
+		ObjectId uuid.UUID `json:"objectId" bson:"objectId"`
+	}{
+		ObjectId: objectId,
+	}
+
+	data := make(map[string]interface{})
+	data[field] = value
+
+	decOperator := coreData.DecrementOperator{
+		Inc: data,
+	}
+	return s.UpdatePost(filter, decOperator)
+}
+
+// IncrementCommentCount increment comment count of post
 func (s PostServiceImpl) IncrementCommentCount(objectId uuid.UUID) error {
 	return s.Increment(objectId, "commentCounter", 1)
 }
 
-// DeceremntCommentCount decerement comment count of post
-func (s PostServiceImpl) DecerementCommentCount(objectId uuid.UUID) error {
-	return s.Increment(objectId, "commentCounter", -1)
+// DecrementCommentCount decrement comment count of post
+func (s PostServiceImpl) DecrementCommentCount(objectId uuid.UUID) error {
+	return s.Decrement(objectId, "commentCounter", -1)
 }
 
 // UpdatePostProfile update the post

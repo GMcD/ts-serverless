@@ -60,7 +60,7 @@ func CreatePostHandle(c *fiber.Ctx) error {
 		Body:             model.Body,
 		OwnerDisplayName: currentUser.DisplayName,
 		OwnerAvatar:      currentUser.Avatar,
-		URLKey:           generatPostURLKey(currentUser.SocialName, model.Body, model.ObjectId.String()),
+		URLKey:           generatePostURLKey(currentUser.SocialName, model.Body, model.ObjectId.String()),
 		Tags:             model.Tags,
 		CommentCounter:   model.CommentCounter,
 		Image:            model.Image,
@@ -92,7 +92,6 @@ func CreatePostHandle(c *fiber.Ctx) error {
 }
 
 // Create Collectives Post Handle
-
 func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 
 	// Create the model object
@@ -132,14 +131,14 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 		ObjectId:         model.ObjectId,
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
-		CollectiveId:    model.CollectiveId,
+		CollectiveId:     model.CollectiveId,
 		Score:            model.Score,
 		Votes:            make(map[string]string),
 		ViewCount:        model.ViewCount,
 		Body:             model.Body,
 		OwnerDisplayName: currentUser.DisplayName,
 		OwnerAvatar:      currentUser.Avatar,
-		URLKey:           generatPostURLKey(currentUser.SocialName, model.Body, model.ObjectId.String()),
+		URLKey:           generatePostURLKey(currentUser.SocialName, model.Body, model.ObjectId.String()),
 		Tags:             model.Tags,
 		CommentCounter:   model.CommentCounter,
 		Image:            model.Image,
@@ -164,7 +163,7 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"objectId": newPost.ObjectId.String(),
+		"objectId": newCollectivesPost.ObjectId.String(),
 	})
 
 }

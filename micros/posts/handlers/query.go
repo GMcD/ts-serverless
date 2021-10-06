@@ -223,7 +223,7 @@ func GeneratePostURLKeyHandle(c *fiber.Ctx) error {
 			return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryOwnerProfilePost", "Error happened while query owner profile post!"))
 		}
 
-		urlKey := generatPostURLKey(postOwnerProfile.SocialName, foundPost.Body, foundPost.ObjectId.String())
+		urlKey := generatePostURLKey(postOwnerProfile.SocialName, foundPost.Body, foundPost.ObjectId.String())
 		err = postService.UpdatePostURLKey(foundPost.ObjectId, urlKey)
 		if err != nil {
 			log.Error("[GetPostHandle.postService.UpdatePostURLKey] %s ", err.Error())

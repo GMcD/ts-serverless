@@ -30,7 +30,7 @@ type PostService interface {
 	DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID) error
 	Increment(objectId uuid.UUID, field string, value int) error
 	IncrementCommentCount(objectId uuid.UUID) error
-	DecerementCommentCount(objectId uuid.UUID) error
+	DecrementCommentCount(objectId uuid.UUID) error
 	UpdatePostProfile(ownerUserId uuid.UUID, ownerDisplayName string, ownerAvatar string) error
 	UpdatePostURLKey(postId uuid.UUID, urlKey string) error
 }
