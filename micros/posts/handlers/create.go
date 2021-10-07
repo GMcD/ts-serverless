@@ -128,7 +128,7 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 	}
 
 	newCollectivesPost := &domain.Post{
-		ObjectId:         model.ObjectId,
+		CollectiveId:     model.CollectiveId,
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
 		CollectiveId:     model.CollectiveId,
@@ -163,7 +163,7 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"objectId": newCollectivesPost.ObjectId.String(),
+		"collectiveId": newCollectivesPost.CollectiveId.String(),
 	})
 
 }
