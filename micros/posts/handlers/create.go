@@ -131,7 +131,6 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 		CollectiveId:     model.CollectiveId,
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
-		CollectiveId:     model.CollectiveId,
 		Score:            model.Score,
 		Votes:            make(map[string]string),
 		ViewCount:        model.ViewCount,
