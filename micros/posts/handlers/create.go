@@ -128,6 +128,7 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 	}
 
 	newCollectivesPost := &domain.Post{
+		ObjectId:         model.ObjectId,
 		CollectiveId:     model.CollectiveId,
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
