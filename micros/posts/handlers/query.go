@@ -21,6 +21,14 @@ type PostQueryModel struct {
 	Type   int         `query:"type"`
 }
 
+type PostQueryCollectivesModel struct {
+	Search       string      `query:"search"`
+	Page         int64       `query:"page"`
+	Owner        []uuid.UUID `query:"owner"`
+	Type         int         `query:"type"`
+	CollectiveId uuid.UUID   `query:"collectiveId"`
+}
+
 // Query Collective's Posts
 func QueryCollectivesPostHandle(c *fiber.Ctx) error {
 
