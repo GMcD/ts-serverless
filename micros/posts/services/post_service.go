@@ -219,7 +219,7 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 }
 
 // QueryPostIncludeUser get all posts by query including user entity
-func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error) {
+func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid.UUID, collectiveId uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error) {
 	sortMap := make(map[string]int)
 	sortMap[sortBy] = -1
 	skip := numberOfItems * (page - 1)
@@ -242,6 +242,9 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 	}
 	if postTypeId > 0 {
 		filter["postTypeId"] = postTypeId
+	}
+	if collectiveId != nil {
+		filter["collectiveId"] = collectiveId
 	}
 
 	log.Info("FindPostsIncludeProfile filter : %s", filter)

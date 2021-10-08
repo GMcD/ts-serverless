@@ -13,7 +13,7 @@ type PostService interface {
 	FindPostList(filter interface{}, limit int64, skip int64, sort map[string]int) ([]dto.Post, error)
 	FindPostsIncludeProfile(filter interface{}, limit int64, skip int64, sort map[string]int) ([]dto.Post, error)
 	QueryPost(search string, ownerUserIds []uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error)
-	QueryPostIncludeUser(search string, ownerUserIds []uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error)
+	QueryPostIncludeUser(search string, ownerUserIds []uuid.UUID, collectiveId uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error)
 	FindById(objectId uuid.UUID) (*dto.Post, error)
 	FindByOwnerUserId(ownerUserId uuid.UUID) ([]dto.Post, error)
 	FindByURLKey(urlKey string) (*dto.Post, error)

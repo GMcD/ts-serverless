@@ -46,8 +46,8 @@ func QueryCollectivesPostHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
 	}
 
-	log.Info("Querying Posts for '%s' from/by '%s'", query.Search, query.Owner)
-	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.Type, "created_date", query.Page)
+	log.Info("Querying Posts for '%s' from/by '%s' in '%s'", query.Search, query.Owner, query.CollectiveId)
+	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.CollectiveId, query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))

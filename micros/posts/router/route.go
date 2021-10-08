@@ -67,6 +67,11 @@ func SetupRoutes(app *fiber.App) {
 	app.Put("/share/disable", append(hmacCookieHandlers, handlers.DisableSharingHandle)...)
 	app.Put("/urlkey/:postId", append(hmacCookieHandlers, handlers.GeneratePostURLKeyHandle)...)
 	app.Delete("/:postId", append(hmacCookieHandlers, handlers.DeletePostHandle)...)
+
+	// Get posts for collectives
+	app.Get("/collectives/", append(hmacCookieHandlers, handlers.QueryCollectivesPostHandle)...)
+	app.Get("/collectives/:collectiveId", append(hmacCookieHandlers, handlers.QueryCollectivesPostHandle)...)
+
 	app.Get("/", append(hmacCookieHandlers, handlers.QueryPostHandle)...)
 	app.Get("/:postId", append(hmacCookieHandlers, handlers.GetPostHandle)...)
 	app.Get("/urlkey/:urlkey", append(hmacCookieHandlers, handlers.GetPostByURLKeyHandle)...)
@@ -74,8 +79,5 @@ func SetupRoutes(app *fiber.App) {
 	// Posting to collections
 	app.Post("/collectives/", append(hmacCookieHandlers, handlers.CreateCollectivesPostHandle)...)
 	app.Put("/collectives/profile", append(hmacCookieHandlers, handlers.UpdateCollectivesPostProfileHandle)...)
-
-	// Get posts for collectives
-	app.Get("/collectives/", append(hmacCookieHandlers, handlers.QueryCollectivesPostHandle)...)
 
 }
