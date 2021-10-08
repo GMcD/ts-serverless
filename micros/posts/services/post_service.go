@@ -243,7 +243,7 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 	if postTypeId > 0 {
 		filter["postTypeId"] = postTypeId
 	}
-	if collectiveId != nil {
+	if collectiveId != uuid.Nil {
 		filter["collectiveId"] = collectiveId
 	}
 
