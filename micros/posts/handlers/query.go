@@ -21,6 +21,34 @@ type PostQueryModel struct {
 	Type   int         `query:"type"`
 }
 
+// Query Collective's Posts
+func QueryCollectivesPostHandle(c *fiber.Ctx) error {
+
+	// Create service
+	postService, serviceErr := service.NewPostService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewPostService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/postService", "Error happened while creating postService!"))
+	}
+
+	query := new(PostQueryCollectivesModel)
+
+	if err := parser.QueryParser(c, query); err != nil {
+		log.Error("[QueryPostHandle] QueryParser %s", err.Error())
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
+	}
+
+	log.Info("Querying Posts for '%s' from/by '%s'", query.Search, query.Owner)
+	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.Type, "created_date", query.Page)
+	if err != nil {
+		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))
+	}
+
+	return c.JSON(postList)
+
+}
+
 // QueryPostHandle handle query on post
 func QueryPostHandle(c *fiber.Ctx) error {
 
