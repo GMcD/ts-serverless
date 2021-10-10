@@ -137,6 +137,7 @@ func (s PostServiceImpl) FindPostsIncludeProfile(filter interface{}, limit int64
 	project := make(map[string]interface{})
 
 	project["objectId"] = 1
+	project["collectiveId"] = 1
 	project["postTypeId"] = 1
 	project["score"] = 1
 	project["votes"] = 1
@@ -179,7 +180,7 @@ func (s PostServiceImpl) FindPostsIncludeProfile(filter interface{}, limit int64
 		var post dto.Post
 		errDecode := result.Decode(&post)
 		if errDecode != nil {
-			return nil, fmt.Errorf("Error docoding on dto.Post")
+			return nil, fmt.Errorf("Error decoding on dto.Post")
 		}
 		postList = append(postList, post)
 	}
