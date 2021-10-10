@@ -15,10 +15,11 @@ import (
 )
 
 type PostQueryModel struct {
-	Search string      `query:"search"`
-	Page   int64       `query:"page"`
-	Owner  []uuid.UUID `query:"owner"`
-	Type   int         `query:"type"`
+	Search       string      `query:"search"`
+	Page         int64       `query:"page"`
+	Owner        []uuid.UUID `query:"owner"`
+	Type         int         `query:"type"`
+	CollectiveId uuid.UUID   `query:"collectiveId"`
 }
 
 type PostQueryCollectivesModel struct {
@@ -46,7 +47,7 @@ func QueryCollectivesPostHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
 	}
 
-	log.Info("Querying Posts for '%s' from/by '%s' in '%s'", query.Search, query.Owner, query.CollectiveId)
+	log.Info("Querying Post Collectives for '%s' from/by '%s' in '%s'", query.Search, query.Owner, query.CollectiveId)
 	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.CollectiveId, query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
@@ -74,7 +75,7 @@ func QueryPostHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
 	}
 
-	log.Info("Querying Posts for '%s' from/by '%s'", query.Search, query.Owner)
+	log.Info("Querying Posts for '%s' from/by '%s', no collective..", query.Search, query.Owner)
 	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, uuid.Nil, query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
