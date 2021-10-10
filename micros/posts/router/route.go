@@ -69,8 +69,8 @@ func SetupRoutes(app *fiber.App) {
 	app.Delete("/:postId", append(hmacCookieHandlers, handlers.DeletePostHandle)...)
 
 	// Get posts for collectives
-	app.Get("/collectives/", append(hmacCookieHandlers, handlers.QueryCollectivesPostHandle)...)
 	app.Get("/collectives/:collectiveId", append(hmacCookieHandlers, handlers.QueryCollectivesPostHandle)...)
+	app.Get("/collectives/", append(hmacCookieHandlers, handlers.QueryCollectivesPostHandle)...)
 
 	app.Get("/", append(hmacCookieHandlers, handlers.QueryPostHandle)...)
 	app.Get("/:postId", append(hmacCookieHandlers, handlers.GetPostHandle)...)
