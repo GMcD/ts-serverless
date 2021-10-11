@@ -122,7 +122,7 @@ func CreateVoteHandle(c *fiber.Ctx) error {
 			OwnerDisplayName:     currentUser.DisplayName,
 			OwnerAvatar:          currentUser.Avatar,
 			Title:                currentUser.DisplayName,
-			Description:          fmt.Sprintf("%s like your post.", currentUser.DisplayName),
+			Description:          "liked your post.",
 			URL:                  URL,
 			NotifyRecieverUserId: post.OwnerUserId,
 			TargetId:             model.PostId,
