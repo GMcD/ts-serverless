@@ -164,6 +164,7 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"collectiveId": newCollectivesPost.CollectiveId.String(),
+		"postId":       newCollectivesPost.ObjectId.String(),
 	})
 
 }
