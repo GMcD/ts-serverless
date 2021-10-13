@@ -160,7 +160,7 @@ func sendFollowNotification(model *socialModels.FollowModel, userInfoInReq *User
 		OwnerDisplayName:     userInfoInReq.DisplayName,
 		OwnerAvatar:          userInfoInReq.Avatar,
 		Title:                userInfoInReq.DisplayName,
-		Description:          fmt.Sprintf("%s is following you.", userInfoInReq.DisplayName),
+		Description:          "engaged with you.",
 		URL:                  URL,
 		NotifyRecieverUserId: model.RightUser.UserId,
 		TargetId:             model.RightUser.UserId,
