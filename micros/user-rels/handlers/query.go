@@ -130,3 +130,29 @@ func GetFollowingHandle(c *fiber.Ctx) error {
 
 	return c.JSON(following)
 }
+
+
+func GetUserCollectiveFollowingHandle(c *fiber.Ctx) error {
+
+	// Create service
+	collectiveRelService, serviceErr := service.NewCollectiveRelService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewCollectiveRelService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/collectiveRelService", "Error happened while creating collectiveRelService!"))
+	}
+
+	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
+	if !ok {
+		log.Error("[GetFollowingHandle] Can not get current user")
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("invalidCurrentUser",
+			"Can not get current user"))
+	}
+
+	following, err := collectiveRelService.GetCollectiveFollowing(currentUser.UserID)
+	if err != nil {
+		log.Error("[GetCollectiveFollowingHandle.collectiveRelService.GetCollectiveFollowing] %s", err.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/getCollectiveFollowing", "Error happened while reading following!"))
+	}
+
+	return c.JSON(following)
+}

@@ -2,11 +2,13 @@ package service
 
 import (
 	dto "github.com/GMcD/ts-serverless/micros/user-rels/dto"
+	uuid "github.com/gofrs/uuid"
 )
 
 type CollectiveRelService interface {
 	CollectiveFollowHandle(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta) error
 	FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error
+	UnfollowCollective(leftId uuid.UUID, collectiveId uuid.UUID) interface{}
 	//SaveCollectiveRel(collectiveRel *dto.CollectiveRel) error
 	//FindCollectiveById(objectId uuid.UUID) (*dto.CollectiveRel, error)
 	//UpdateCollectiveRel(filter interface{}, data interface{}) error

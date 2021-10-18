@@ -63,4 +63,7 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/following", append(hmacCookieHandlers, handlers.GetFollowingHandle)...)
 
 	app.Post("/collectives/follow", append(hmacCookieHandlers, handlers.CollectiveFollowHandle)...)
+	app.Post("/collectives/unfollow/:collectiveId", append(hmacCookieHandlers, handlers.CollectiveUnFollowHandle)...)
+
+	app.Get("/collectives/userFollowing", append(hmacCookieHandlers, handlers.GetUserCollectiveFollowingHandle)...)
 }
