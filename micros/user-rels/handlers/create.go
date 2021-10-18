@@ -98,3 +98,54 @@ func FollowHandle(c *fiber.Ctx) error {
 
 	return c.SendStatus(http.StatusOK)
 }
+
+//CollectiveFollowHandle handle create a new userRel
+func CollectiveFollowHandle(c *fiber.Ctx) error {
+
+	// Create the model object
+	model := new(socialModels.CollectiveFollowModel)
+	if err := c.BodyParser(model); err != nil {
+		errorMessage := fmt.Sprintf("Parse CollectiveRel Error %s", err.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/parseModel", "Error happened while parsing model!"))
+	}
+
+	// Create service
+	collectiveRelService, serviceErr := service.NewCollectiveRelService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewCollectiveRelService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/collectiveRelService", "Error happened while creating collectiveRelService!"))
+	}
+
+	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
+	if !ok {
+		log.Error("[CollectiveFollowHandle] Can not get current user")
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("invalidCurrentUser",
+			"Can not get current user"))
+	}
+
+	// Left User Meta
+	leftUserMeta := domain.UserRelMeta{
+		UserId:   currentUser.UserID,
+		FullName: currentUser.DisplayName,
+		Avatar:   currentUser.Avatar,
+	}
+
+	// Right User Meta
+	collectiveMeta := domain.CollectiveRelMeta{
+		CollectiveId: model.Collective.CollectiveId,
+		Title:        model.Collective.Title,
+		Avatar:       model.Collective.Avatar,
+	}
+
+	// Store the relation
+	if err := collectiveRelService.FollowCollective(leftUserMeta, collectiveMeta, []string{"status:follow"}); err != nil {
+		errorMessage := fmt.Sprintf("Save UserRel Error %s", err.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/saveCollectiveRel", "Error happened while saving CollectiveRel!"))
+	}
+
+	//go increaseCollectiveFollowerCount(model.Collective.CollectiveId, 1, getCollectiveInfoReq(c))
+
+	return c.SendStatus(http.StatusOK)
+}
