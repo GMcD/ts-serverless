@@ -99,7 +99,6 @@ func FollowHandle(c *fiber.Ctx) error {
 	return c.SendStatus(http.StatusOK)
 }
 
-
 //CollectiveFollowHandle handle create a new userRel
 func CollectiveFollowHandle(c *fiber.Ctx) error {
 
@@ -140,13 +139,13 @@ func CollectiveFollowHandle(c *fiber.Ctx) error {
 	}
 
 	// Store the relation
-	if err := collectiveRelService.FollowCollective(leftUserMeta, collectiveUserMeta, model.CircleIds, []string{"status:follow"}); err != nil {
+	if err := collectiveRelService.FollowCollective(leftUserMeta, collectiveMeta, []string{"status:follow"}); err != nil {
 		errorMessage := fmt.Sprintf("Save UserRel Error %s", err.Error())
 		log.Error(errorMessage)
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/saveCollectiveRel", "Error happened while saving CollectiveRel!"))
 	}
 
-	go increaseCollectiveFollowerCount(model.Collective.CollectiveId, 1, getCollectiveInfoReq(c))
+	//go increaseCollectiveFollowerCount(model.Collective.CollectiveId, 1, getCollectiveInfoReq(c))
 
 	return c.SendStatus(http.StatusOK)
 }
