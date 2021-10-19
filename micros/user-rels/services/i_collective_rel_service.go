@@ -6,7 +6,6 @@ import (
 )
 
 type CollectiveRelService interface {
-	CollectiveFollowHandle(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta) error
 	FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error
 	SaveCollectiveRel(collectiveRel *dto.CollectiveRel) error
 	FindCollectiveById(objectId uuid.UUID) (*dto.CollectiveRel, error)

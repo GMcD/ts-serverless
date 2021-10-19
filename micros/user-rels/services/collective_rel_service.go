@@ -18,21 +18,6 @@ type CollectiveRelServiceImpl struct {
 	CollectiveRelRepo repo.Repository
 }
 
-//FollowCollective create relation between two users
-func (s CollectiveRelServiceImpl) FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error {
-
-	newCollectiveRel := &dto.CollectiveRel{
-		Left:         leftUser,
-		LeftId:       leftUser.UserId,
-		Collective:   collective,
-		CollectiveId: collective.CollectiveId,
-		Rel:          []string{leftUser.UserId.String(), collective.CollectiveId.String()},
-		Tags:         tags,
-	}
-	err := s.SaveCollectiveRel(newCollectiveRel)
-	return err
-}
-
 func NewCollectiveRelService(db interface{}) (CollectiveRelService, error) {
 
 	collectiveRelService := &CollectiveRelServiceImpl{}
@@ -46,6 +31,21 @@ func NewCollectiveRelService(db interface{}) (CollectiveRelService, error) {
 	}
 
 	return collectiveRelService, nil
+}
+
+//FollowCollective create relation between two users
+func (s CollectiveRelServiceImpl) FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error {
+
+	newCollectiveRel := &dto.CollectiveRel{
+		Left:         leftUser,
+		LeftId:       leftUser.UserId,
+		Collective:   collective,
+		CollectiveId: collective.CollectiveId,
+		Rel:          []string{leftUser.UserId.String(), collective.CollectiveId.String()},
+		Tags:         tags,
+	}
+	err := s.SaveCollectiveRel(newCollectiveRel)
+	return err
 }
 
 // UnfollowCollective delete relation between a collective, and a user (inherits left-syntax from UnFollowUser)
@@ -96,7 +96,7 @@ func (s CollectiveRelServiceImpl) SaveCollectiveRel(collectiveRel *dto.Collectiv
 	return result.Error
 }
 
-// GetCollectiveollowing Get Collective following by collectiveId
+// GetCollectiveFollowing Get Collective following by collectiveId
 func (s CollectiveRelServiceImpl) GetCollectiveFollowing(userId uuid.UUID) ([]dto.CollectiveRel, error) {
 	sortMap := make(map[string]int)
 	sortMap["created_date"] = -1
