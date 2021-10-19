@@ -19,7 +19,7 @@ type CollectiveRelServiceImpl struct {
 }
 
 //FollowCollective create relation between two users
-func (s UserRelServiceImpl) FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error {
+func (s CollectiveRelServiceImpl) FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error {
 
 	newCollectiveRel := &dto.CollectiveRel{
 		Left:         leftUser,
