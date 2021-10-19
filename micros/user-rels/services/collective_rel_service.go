@@ -139,6 +139,18 @@ func (s CollectiveRelServiceImpl) SaveCollectiveRel(collectiveRel *dto.Collectiv
 	return result.Error
 }
 
+// GetFollowers Get collective followers by collectiveId
+func (s CollectiveRelServiceImpl) GetFollowers(userId uuid.UUID) ([]dto.CollectiveRel, error) {
+	sortMap := make(map[string]int)
+	sortMap["created_date"] = -1
+	filter := struct {
+		RightId uuid.UUID `json:"rightId" bson:"rightId"`
+	}{
+		RightId: userId,
+	}
+	return s.FindCollectiveRelsIncludeProfile(filter, 0, 0, sortMap)
+}
+
 // GetCollectiveFollowing Get Collective following by collectiveId
 func (s CollectiveRelServiceImpl) GetCollectiveFollowing(userId uuid.UUID) ([]dto.CollectiveRel, error) {
 	sortMap := make(map[string]int)
