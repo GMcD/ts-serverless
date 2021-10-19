@@ -139,6 +139,16 @@ func (s CollectiveRelServiceImpl) SaveCollectiveRel(collectiveRel *dto.Collectiv
 	return result.Error
 }
 
+// UpdateCollectiveRel update the collectiveRel
+func (s CollectiveRelServiceImpl) UpdateCollectiveRel(filter interface{}, data interface{}) error {
+
+	result := <-s.CollectiveRelRepo.Update(collectiveRelCollectionName, filter, data)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
 // GetFollowers Get collective followers by collectiveId
 func (s CollectiveRelServiceImpl) GetFollowers(userId uuid.UUID) ([]dto.CollectiveRel, error) {
 	sortMap := make(map[string]int)
