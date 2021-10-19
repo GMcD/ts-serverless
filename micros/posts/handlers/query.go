@@ -22,6 +22,15 @@ type PostQueryModel struct {
 	CollectiveId uuid.UUID   `query:"collectiveId"`
 }
 
+type PostFeedQueryModel struct {
+	Search          string      `query:"search"`
+	Page            int64       `query:"page"`
+	Owner           []uuid.UUID `query:"owner"`
+	CollectiveOwner []uuid.UUID `query:"collectiveOwner"`
+	Type            int         `query:"type"`
+	CollectiveId    uuid.UUID   `query:"collectiveId"`
+}
+
 type PostQueryCollectivesModel struct {
 	Search       string      `query:"search"`
 	Page         int64       `query:"page"`
@@ -83,6 +92,18 @@ func QueryPostHandle(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(postList)
+
+}
+
+func GetFeedHandle(c *fiber.Ctx) error {
+
+	postService, serviceErr := service.NewPostService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewPostService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/postService", "Error happened while creating postService for feed!"))
+	}
+
+	return c.JSON(feedList)
 
 }
 
