@@ -213,8 +213,8 @@ func (s CollectiveRelServiceImpl) FindCollectiveRelsIncludeProfile(filter interf
 	lookupCollective := make(map[string]map[string]string)
 	lookupCollective["$lookup"] = map[string]string{
 		"localField":   "collectiveId",
-		"from":         "collectiveProfile",
-		"foreignField": "objectId",
+		"from":         "collective",
+		"foreignField": "collectiveId",
 		"as":           "collective",
 	}
 
