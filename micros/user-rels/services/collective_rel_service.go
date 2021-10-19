@@ -65,7 +65,34 @@ func (s CollectiveRelServiceImpl) UnfollowCollective(leftId uuid.UUID, collectiv
 	return nil
 }
 
-// DeleteColectiveRel delete collectiveRel by filter
+// FindById find by collectiveRel id
+func (s CollectiveRelServiceImpl) FindById(objectId uuid.UUID) (*dto.CollectiveRel, error) {
+
+	filter := struct {
+		ObjectId uuid.UUID `json:"objectId" bson:"objectId"`
+	}{
+		ObjectId: objectId,
+	}
+	return s.FindOneCollectiveRel(filter)
+}
+
+// FindOneCollectiveRel get one collectiveRel
+func (s CollectiveRelServiceImpl) FindOneCollectiveRel(filter interface{}) (*dto.CollectiveRel, error) {
+
+	result := <-s.CollectiveRelRepo.FindOne(collectiveRelCollectionName, filter)
+	if result.Error() != nil {
+		return nil, result.Error()
+	}
+
+	var collectiveRelResult dto.CollectiveRel
+	errDecode := result.Decode(&collectiveRelResult)
+	if errDecode != nil {
+		return nil, fmt.Errorf("Error decoding on dto.CollectiveRel")
+	}
+	return &collectiveRelResult, nil
+}
+
+// DeleteCollectiveRel delete collectiveRel by filter
 func (s CollectiveRelServiceImpl) DeleteCollectiveRel(filter interface{}) error {
 
 	result := <-s.CollectiveRelRepo.Delete(collectiveRelCollectionName, filter, true)
