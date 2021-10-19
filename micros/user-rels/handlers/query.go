@@ -131,7 +131,6 @@ func GetFollowingHandle(c *fiber.Ctx) error {
 	return c.JSON(following)
 }
 
-
 func GetUserCollectiveFollowingHandle(c *fiber.Ctx) error {
 
 	// Create service

@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+
 	"github.com/GMcD/ts-serverless/micros/user-rels/dto"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/config"
@@ -94,7 +95,6 @@ func (s CollectiveRelServiceImpl) SaveCollectiveRel(collectiveRel *dto.Collectiv
 
 	return result.Error
 }
-
 
 // GetCollectiveollowing Get Collective following by collectiveId
 func (s CollectiveRelServiceImpl) GetCollectiveFollowing(userId uuid.UUID) ([]dto.CollectiveRel, error) {

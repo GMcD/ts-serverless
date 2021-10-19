@@ -399,5 +399,3 @@ func (s UserRelServiceImpl) UnfollowUser(leftId uuid.UUID, rightId uuid.UUID) er
 	}
 	return nil
 }
-
-
