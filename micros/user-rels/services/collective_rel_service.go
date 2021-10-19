@@ -76,7 +76,13 @@ func (s CollectiveRelServiceImpl) DeleteCollectiveRel(filter interface{}) error 
 	return nil
 }
 
-// SaveUserRel save the userRel
+// CreateCollectiveRelIndex create index for collectiveRel search.
+func (s CollectiveRelServiceImpl) CreateCollectiveRelIndex(indexes map[string]interface{}) error {
+	result := <-s.CollectiveRelRepo.CreateIndex(collectiveRelCollectionName, indexes)
+	return result
+}
+
+// SaveCollectiveRel save the collectiveRel
 func (s CollectiveRelServiceImpl) SaveCollectiveRel(collectiveRel *dto.CollectiveRel) error {
 
 	if collectiveRel.ObjectId == uuid.Nil {
