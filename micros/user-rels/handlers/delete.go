@@ -126,3 +126,49 @@ func DeleteCircle(c *fiber.Ctx) error {
 	}
 	return c.SendStatus(http.StatusOK)
 }
+
+//CollectiveUnfollowHandle handle delete a userRel
+func CollectiveUnFollowHandle(c *fiber.Ctx) error {
+
+	// params from /user-rels/unfollow/:userId
+	collectiveFollowingId := c.Params("collectiveId")
+	if collectiveFollowingId == "" {
+		errorMessage := fmt.Sprintf("Collective Id is required!")
+		log.Error(errorMessage)
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("collectiveIdRequired", errorMessage))
+	}
+
+	collectiveFollowingUUID, uuidErr := uuid.FromString(collectiveFollowingId)
+	if uuidErr != nil {
+		errorMessage := fmt.Sprintf("collectiveFollowingUUID Error %s", uuidErr.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("collectiveFollowingIdIsNotValid", "collective following id is not valid!"))
+	}
+
+	// Create service
+	collectiveRelService, serviceErr := service.NewCollectiveRelService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewCollectiveRelService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/collectiveRelService", "Error happened while creating collectiveRelService!"))
+	}
+
+	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
+	if !ok {
+		log.Error("[UnfollowHandle] Can not get current user")
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("invalidCurrentUser",
+			"Can not get current user"))
+	}
+
+	if err := collectiveRelService.UnfollowCollective(currentUser.UserID, collectiveFollowingUUID); err != nil {
+		errorMessage := fmt.Sprintf("Delete CollectiveRel Error %s", serviceErr.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/unfollowCollective", "Error happened while removing collective-rel!"))
+	}
+
+	// Decrease user follow count
+	go increaseUserFollowCount(currentUser.UserID, -1, getUserInfoReq(c))
+	// Decrease user follower count
+	//go increaseCollectiveFollowerCount(collectiveFollowingUUID, -1, getCollectiveInfoReq(c))
+
+	return c.SendStatus(http.StatusOK)
+}

@@ -19,33 +19,6 @@ type UserRelServiceImpl struct {
 	UserRelRepo repo.Repository
 }
 
-type CollectiveRelServiceImpl struct {
-	CollectiveRelRepo repo.Repository
-}
-
-func (c CollectiveRelServiceImpl) CollectiveFollowHandle(leftUser dto.CollectiveRelMeta, collective dto.CollectiveRelMeta) error {
-	panic("implement me")
-}
-
-func (c CollectiveRelServiceImpl) FollowCollective(leftUser dto.UserRelMeta, collective dto.CollectiveRelMeta, tags []string) error {
-	panic("implement me")
-}
-
-func NewCollectiveRelService(db interface{}) (CollectiveRelService, error) {
-
-	collectiveRelService := &CollectiveRelServiceImpl{}
-
-	switch *config.AppConfig.DBType {
-	case config.DB_MONGO:
-
-		mongodb := db.(mongodb.MongoDatabase)
-		collectiveRelService.CollectiveRelRepo = mongoRepo.NewDataRepositoryMongo(mongodb)
-
-	}
-
-	return collectiveRelService, nil
-}
-
 // NewUserRelService initializes UserRelService's dependencies and create new UserRelService struct
 func NewUserRelService(db interface{}) (UserRelService, error) {
 
@@ -426,3 +399,5 @@ func (s UserRelServiceImpl) UnfollowUser(leftId uuid.UUID, rightId uuid.UUID) er
 	}
 	return nil
 }
+
+
