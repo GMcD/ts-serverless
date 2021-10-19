@@ -133,9 +133,9 @@ func CollectiveFollowHandle(c *fiber.Ctx) error {
 
 	// Right Collective Meta
 	collectiveMeta := domain.CollectiveRelMeta{
-		CollectiveId: model.CollectiveId,
-		Title:        model.Title,
-		Avatar:       model.Avatar,
+		CollectiveId: model.Collective.CollectiveId,
+		Title:        model.Collective.Title,
+		Avatar:       model.Collective.Avatar,
 	}
 
 	// Store the relation
