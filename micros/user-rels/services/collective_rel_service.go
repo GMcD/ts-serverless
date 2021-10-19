@@ -76,6 +76,16 @@ func (s CollectiveRelServiceImpl) DeleteCollectiveRel(filter interface{}) error 
 	return nil
 }
 
+// DeleteManyCollectiveRel delete many collectiveRel by filter
+func (s CollectiveRelServiceImpl) DeleteManyCollectiveRel(filter interface{}) error {
+
+	result := <-s.CollectiveRelRepo.Delete(collectiveRelCollectionName, filter, false)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
 // CreateCollectiveRelIndex create index for collectiveRel search.
 func (s CollectiveRelServiceImpl) CreateCollectiveRelIndex(indexes map[string]interface{}) error {
 	result := <-s.CollectiveRelRepo.CreateIndex(collectiveRelCollectionName, indexes)
