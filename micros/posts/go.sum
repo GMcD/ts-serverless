@@ -113,9 +113,6 @@ github.com/plivo/plivo-go v5.5.1+incompatible h1:LtZaUNHjSrNzBCHAe/IdDBnLGlyZB+W
 github.com/plivo/plivo-go v5.5.1+incompatible/go.mod h1:OhnI9crdl6O+D94Lp1lvuwJoA3KUH39J6IM+j3HwCBE=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/red-gold/telar-core v0.1.10/go.mod h1:JdeL5OLMsNUspxjoxM4b7DDmiEDHj9MRZuuw8QO8ui4=
-github.com/red-gold/ts-serverless v0.1.34 h1:57xnNOj28b0dsiicidqePMVCf8a7QyhvvacOot37+FM=
-github.com/red-gold/ts-serverless v0.1.34/go.mod h1:J/60CaiVd81lYAxTSiwMOb0Db0FppG+Lyo87U1rcYAM=
 github.com/rogpeppe/go-internal v1.1.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.2.2/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=

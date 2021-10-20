@@ -75,4 +75,4 @@ up: login
 	# ./update-micros.sh telar-core
 	# ./update-micros.sh telar-web
 	echo "Running FaaS up..."
-	GOPRIVATE=github.com/GMcD faas up --build-arg GO111MODULE=on
+	GOPRIVATE=github.com/GMcD faas build --no-cache --build-arg GO111MODULE=on
