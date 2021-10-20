@@ -1,9 +1,9 @@
 package models
 
 import (
+	"github.com/GMcD/ts-serverless/constants"
 	dto "github.com/GMcD/ts-serverless/micros/posts/dto"
 	uuid "github.com/gofrs/uuid"
-	"github.com/red-gold/ts-serverless/constants"
 )
 
 type CreateCollectivesPostModel struct {
