@@ -71,7 +71,7 @@ func (s PostServiceImpl) FindOnePost(filter interface{}) (*dto.Post, error) {
 	var postResult dto.Post
 	errDecode := result.Decode(&postResult)
 	if errDecode != nil {
-		return nil, fmt.Errorf("Error docoding on dto.Post")
+		return nil, fmt.Errorf("Error decoding on dto.Post")
 	}
 	return &postResult, nil
 }
@@ -373,19 +373,19 @@ func (s PostServiceImpl) CreatePostIndex(indexes map[string]interface{}) error {
 }
 
 // IncrementScoreCount increment score of post
-func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, avatar string) error {
+func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, displayName string, avatar string) error {
 	filter := struct {
 		ObjectId uuid.UUID `json:"objectId" bson:"objectId"`
 	}{
 		ObjectId: objectId,
 	}
 
-	data := make(map[string]interface{})
-	targetField := fmt.Sprintf("votes.%s", ownerUserId.String())
-	log.Info("IncrementScoreCount %v - %v - %v ", targetField, objectId, avatar)
-	data[targetField] = avatar
+	log.Info("IncrementScoreCount %v - %v - %v ", objectId, displayName, avatar)
+
+	var voter = dto.VoterProfile(objectId, displayName, avatar)
+
 	updateOperator := coreData.UpdateOperator{
-		Set: data,
+		Set: voter,
 	}
 	options := &coreData.UpdateOptions{}
 	options.SetUpsert(true)

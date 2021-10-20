@@ -10,7 +10,7 @@ type Post struct {
 	CollectiveId     uuid.UUID                     `json:"collectiveId" bson:"collectiveId"`
 	PostTypeId       int                           `json:"postTypeId" bson:"postTypeId"`
 	Score            int64                         `json:"score" bson:"score"`
-	Votes            map[string]string             `json:"votes" bson:"votes"`
+	Votes            []VoterProfile                `json:"votes" bson:"votes"`
 	ViewCount        int64                         `json:"viewCount" bson:"viewCount"`
 	Body             string                        `json:"body" bson:"body"`
 	OwnerUserId      uuid.UUID                     `json:"ownerUserId" bson:"ownerUserId"`

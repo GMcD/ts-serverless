@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/GMcD/ts-serverless/constants"
+	"github.com/GMcD/ts-serverless/micros/posts/dto"
 	uuid "github.com/gofrs/uuid"
 )
 
@@ -9,7 +10,7 @@ type PostUpdateModel struct {
 	ObjectId         uuid.UUID                     `json:"objectId" bson:"objectId"`
 	PostTypeId       int                           `json:"postTypeId" bson:"postTypeId"`
 	Score            int64                         `json:"score" bson:"score"`
-	Votes            map[string]string             `json:"votes" bson:"votes"`
+	Votes            *dto.VoterProfile             `json:"votes" bson:"votes"`
 	ViewCount        int64                         `json:"viewCount" bson:"viewCount"`
 	Body             string                        `json:"body" bson:"body"`
 	OwnerUserId      uuid.UUID                     `json:"ownerUserId" bson:"ownerUserId"`

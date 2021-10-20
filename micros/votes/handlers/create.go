@@ -84,8 +84,11 @@ func CreateVoteHandle(c *fiber.Ctx) error {
 	go func() {
 		fullURL := "/posts/score"
 		payload, err := json.Marshal(fiber.Map{
-			"postId": model.PostId,
-			"count":  1,
+			"postId":      model.PostId,
+			"count":       1,
+			"userId":      currentUser.UserID,
+			"displayName": currentUser.DisplayName,
+			"avatar":      currentUser.Avatar,
 		})
 		if err != nil {
 			messageError := fmt.Sprintf("Can not parse score payload: %s", err.Error())

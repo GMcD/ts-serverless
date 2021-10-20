@@ -67,9 +67,10 @@ up:			# If a build breaks due to syntax errors, there is an issue with pseudo-ve
 up:			# numbers, whereby the error is uploaded to public github, and subsequent builds will
 up:			# pick up the new release, when it is pushed, as it can't be pushed til it is built..
 up:			# Current resolution is to rebuild the broken guy, out of band, with
-up:			# `docker builder prune` && \
+up:			# `docker builder prune -f` && \
 up:			# `GOPRIVATE=github.com/GMcD faas build --no-cache --build-arg GO111MODULE=on --filter collective` 
 up: login
+	for micro in $$(ls -d micros/*/); do pushd ./$${micro}; GOPRIVATE=github.com/GMcD go mod tidy; popd; done
 	# Update micros with new core && code bases
 	# ./update-micros.sh telar-core
 	# ./update-micros.sh telar-web

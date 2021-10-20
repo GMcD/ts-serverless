@@ -26,7 +26,7 @@ type PostService interface {
 	CreatePostIndex(indexes map[string]interface{}) error
 	DisableCommnet(OwnerUserId uuid.UUID, objectId uuid.UUID, value bool) error
 	DisableSharing(OwnerUserId uuid.UUID, objectId uuid.UUID, value bool) error
-	IncrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, avatar string) error
+	IncrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, displayName string, avatar string) error
 	DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID) error
 	Increment(objectId uuid.UUID, field string, value int) error
 	IncrementCommentCount(objectId uuid.UUID) error

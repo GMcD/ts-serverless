@@ -120,7 +120,7 @@ func IncrementScoreHandle(c *fiber.Ctx) error {
 	}
 
 	if model.Count > 0 {
-		err := postService.IncrementScoreCount(model.PostId, currentUser.UserID, currentUser.Avatar)
+		err := postService.IncrementScoreCount(model.PostId, currentUser.UserID, currentUser.DisplayName, currentUser.Avatar)
 		if err != nil {
 			errorMessage := fmt.Sprintf("[IncrementScoreCount] Update Post Error %s", err.Error())
 			log.Error(errorMessage)

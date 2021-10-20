@@ -3,6 +3,8 @@ github.com/GMcD/telar-core v0.1.37 h1:3tsE3wi4F0VBgaVZZKHwSF2YfWOGmpjnQQ2xZ/hg8/
 github.com/GMcD/telar-core v0.1.37/go.mod h1:uZAubEVyR4eOJL1l1fqGhRMqs1rANM5gohRO3vcpOYs=
 github.com/GMcD/telar-web v0.1.88 h1:/2FuBuf6upBep7dCktOnGiwiMqvJP9zIy2aEBchZI+c=
 github.com/GMcD/telar-web v0.1.88/go.mod h1:1Vad/rz367iKDjWiruUM1J8tYu5UxmX5sVgy8FWAzVc=
+github.com/GMcD/ts-serverless v0.1.82 h1:eT5waU+oM7jkteLSSbZemMhmn3PEX0izDkGa4CV8y9I=
+github.com/GMcD/ts-serverless v0.1.82/go.mod h1:9xP8DBNzUpRAn7e7B5/cHDJtCFWQdDFW3D4BerVUBG0=
 github.com/MicahParks/keyfunc v0.8.2 h1:C5T/ixarxdwFVDHh10+UwP6Bi2GIlvs9IwICg9kCs/I=
 github.com/MicahParks/keyfunc v0.8.2/go.mod h1:yGAHz3pCqcMHdEbqZWv5kvY9p5KXO/c38QW3018ax74=
 github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de h1:jiPEvtW8VT0KwJxRyjW2VAAvlssjj9SfecsQ3Vgv5tk=
@@ -16,6 +18,8 @@ github.com/aws/aws-sdk-go v1.34.28/go.mod h1:H7NKnBqNVzoTJpGfLrQkkD+ytBA93eiDYi/
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
+github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/fatih/color v1.10.0 h1:s36xzo75JdqLaaWoiEHk767eHiwo0598uUxyfiPkDsg=
 github.com/fatih/color v1.10.0/go.mod h1:ELkj/draVOlAH/xkhN6mQ50Qd0MPOk5AAr3maGEBuJM=
 github.com/form3tech-oss/jwt-go v3.2.5+incompatible h1:/l4kBbb4/vGSsdtB5nUe8L7B9mImVMaBPw9L/0TBHU8=
@@ -110,6 +114,8 @@ github.com/plivo/plivo-go v5.5.1+incompatible/go.mod h1:OhnI9crdl6O+D94Lp1lvuwJo
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/red-gold/telar-core v0.1.10/go.mod h1:JdeL5OLMsNUspxjoxM4b7DDmiEDHj9MRZuuw8QO8ui4=
+github.com/red-gold/ts-serverless v0.1.34 h1:57xnNOj28b0dsiicidqePMVCf8a7QyhvvacOot37+FM=
+github.com/red-gold/ts-serverless v0.1.34/go.mod h1:J/60CaiVd81lYAxTSiwMOb0Db0FppG+Lyo87U1rcYAM=
 github.com/rogpeppe/go-internal v1.1.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.2.2/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=

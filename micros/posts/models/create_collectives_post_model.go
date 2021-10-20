@@ -1,6 +1,7 @@
 package models
 
 import (
+	dto "github.com/GMcD/ts-serverless/micros/posts/dto"
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/ts-serverless/constants"
 )
@@ -10,7 +11,7 @@ type CreateCollectivesPostModel struct {
 	CollectiveId     uuid.UUID                     `json:"collectiveId"`
 	PostTypeId       int                           `json:"postTypeId"`
 	Score            int64                         `json:"score"`
-	Votes            map[string]bool               `json:"votes"`
+	Votes            []dto.VoterProfile            `json:"votes"`
 	ViewCount        int64                         `json:"viewCount"`
 	Body             string                        `json:"body"`
 	OwnerUserId      uuid.UUID                     `json:"ownerUserId"`

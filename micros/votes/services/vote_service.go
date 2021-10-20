@@ -68,7 +68,7 @@ func (s VoteServiceImpl) FindOneVote(filter interface{}) (*dto.Vote, error) {
 	var voteResult dto.Vote
 	errDecode := result.Decode(&voteResult)
 	if errDecode != nil {
-		return nil, fmt.Errorf("Error docoding on dto.Vote")
+		return nil, fmt.Errorf("Error decoding on dto.Vote")
 	}
 	return &voteResult, nil
 }
@@ -86,7 +86,7 @@ func (s VoteServiceImpl) FindVoteList(filter interface{}, limit int64, skip int6
 		var vote dto.Vote
 		errDecode := result.Decode(&vote)
 		if errDecode != nil {
-			return nil, fmt.Errorf("Error docoding on dto.Vote")
+			return nil, fmt.Errorf("Error decoding on dto.Vote")
 		}
 		voteList = append(voteList, vote)
 	}

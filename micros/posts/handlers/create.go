@@ -43,6 +43,8 @@ func CreatePostHandle(c *fiber.Ctx) error {
 		}
 	}
 
+	var noVotes []domain.VoterProfile
+
 	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
 	if !ok {
 		log.Error("[CreatePostHandle] Can not get current user")
@@ -55,7 +57,7 @@ func CreatePostHandle(c *fiber.Ctx) error {
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
 		Score:            model.Score,
-		Votes:            make(map[string]string),
+		Votes:            noVotes,
 		ViewCount:        model.ViewCount,
 		Body:             model.Body,
 		OwnerDisplayName: currentUser.DisplayName,
@@ -120,6 +122,8 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 		}
 	}
 
+	var noVotes []domain.VoterProfile
+
 	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
 	if !ok {
 		log.Error("[CreatePostHandle] Can not get current user")
@@ -133,7 +137,7 @@ func CreateCollectivesPostHandle(c *fiber.Ctx) error {
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
 		Score:            model.Score,
-		Votes:            make(map[string]string),
+		Votes:            noVotes,
 		ViewCount:        model.ViewCount,
 		Body:             model.Body,
 		OwnerDisplayName: currentUser.DisplayName,
