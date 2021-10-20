@@ -382,7 +382,11 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 
 	log.Info("IncrementScoreCount %v - %v - %v ", objectId, displayName, avatar)
 
-	var voter = dto.VoterProfile(objectId, displayName, avatar)
+	var voter = dto.VoterProfile{
+						ObjectId : objectId, 
+						DisplayName : displayName, 
+						Avatar : avatar
+					}
 
 	updateOperator := coreData.UpdateOperator{
 		Set: voter,
