@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/GMcD/ts-serverless/micros/posts/database"
-	"github.com/GMcD/ts-serverless/micros/posts/dto"
 	models "github.com/GMcD/ts-serverless/micros/posts/models"
 	service "github.com/GMcD/ts-serverless/micros/posts/services"
 	"github.com/gofiber/fiber/v2"
@@ -42,9 +41,6 @@ func UpdatePostHandle(c *fiber.Ctx) error {
 		Title:   model.Album.Title,
 	}
 
-	// Only the /score/ route will update Votes
-	var newVote *dto.VoterProfile = nil
-
 	currentUser, ok := c.Locals(types.UserCtxName).(types.UserContext)
 	if !ok {
 		log.Error("[UpdatePostHandle] Can not get current user")
@@ -57,7 +53,7 @@ func UpdatePostHandle(c *fiber.Ctx) error {
 		PostTypeId:       model.PostTypeId,
 		OwnerUserId:      currentUser.UserID,
 		Score:            model.Score,
-		Votes:            newVote,
+		Votes:            model.Votes,
 		ViewCount:        model.ViewCount,
 		Body:             model.Body,
 		OwnerDisplayName: currentUser.DisplayName,
