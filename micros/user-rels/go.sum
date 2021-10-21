@@ -1,8 +1,8 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/GMcD/telar-core v0.1.37 h1:3tsE3wi4F0VBgaVZZKHwSF2YfWOGmpjnQQ2xZ/hg8/o=
 github.com/GMcD/telar-core v0.1.37/go.mod h1:uZAubEVyR4eOJL1l1fqGhRMqs1rANM5gohRO3vcpOYs=
-github.com/GMcD/ts-serverless v0.1.92 h1:XoKNixQZNYH0OvDIPlX5Vsb22qaZzahhU+bdoHkW320=
-github.com/GMcD/ts-serverless v0.1.92/go.mod h1:9xP8DBNzUpRAn7e7B5/cHDJtCFWQdDFW3D4BerVUBG0=
+github.com/GMcD/ts-serverless v0.1.93 h1:f2NhHJIh3FPm5e8tEp5yzDpozgpgtNAQosjzO+37MD4=
+github.com/GMcD/ts-serverless v0.1.93/go.mod h1:9xP8DBNzUpRAn7e7B5/cHDJtCFWQdDFW3D4BerVUBG0=
 github.com/MicahParks/keyfunc v0.8.2 h1:C5T/ixarxdwFVDHh10+UwP6Bi2GIlvs9IwICg9kCs/I=
 github.com/MicahParks/keyfunc v0.8.2/go.mod h1:yGAHz3pCqcMHdEbqZWv5kvY9p5KXO/c38QW3018ax74=
 github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de h1:jiPEvtW8VT0KwJxRyjW2VAAvlssjj9SfecsQ3Vgv5tk=
