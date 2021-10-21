@@ -6,7 +6,7 @@ go 1.16
 
 require (
 	github.com/GMcD/telar-web v0.1.88
-	github.com/GMcD/ts-serverless v0.1.96
+	github.com/GMcD/ts-serverless v0.1.97
 	github.com/alexellis/hmac v0.0.0-20180624211220-5c52ab81c0de
 	github.com/gofiber/adaptor/v2 v2.1.4
 	github.com/gofiber/fiber/v2 v2.10.0
