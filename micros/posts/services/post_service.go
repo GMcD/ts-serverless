@@ -71,7 +71,8 @@ func (s PostServiceImpl) FindOnePost(filter interface{}) (*dto.Post, error) {
 	var postResult dto.Post
 	errDecode := result.Decode(&postResult)
 	if errDecode != nil {
-		return nil, fmt.Errorf("Error decoding on dto.Post")
+		// return nil, fmt.Errorf("Error decoding on dto.Post")
+		log.Info("Error decoding on dto.Post : %v", postResult)
 	}
 	return &postResult, nil
 }
@@ -180,7 +181,8 @@ func (s PostServiceImpl) FindPostsIncludeProfile(filter interface{}, limit int64
 		var post dto.Post
 		errDecode := result.Decode(&post)
 		if errDecode != nil {
-			return nil, fmt.Errorf("Error decoding on dto.Post")
+			// return nil, fmt.Errorf("Error decoding on dto.Post")
+			log.Info("Error decoding on dto.Post : %v", post)
 		}
 		postList = append(postList, post)
 	}
