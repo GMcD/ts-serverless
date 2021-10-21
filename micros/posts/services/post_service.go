@@ -382,10 +382,10 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 		ObjectId: objectId,
 	}
 
-	log.Info("IncrementScoreCount %v - %v - %v ", objectId, displayName, avatar)
+	log.Info("IncrementScoreCount %v - (%v, %v, %v)", objectId, ownerUserId, displayName, avatar)
 
 	var voter = dto.VoterProfile{
-		ObjectId:    objectId,
+		ObjectId:    ownerUserId,
 		DisplayName: displayName,
 		Avatar:      avatar,
 	}
