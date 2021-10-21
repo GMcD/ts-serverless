@@ -401,7 +401,7 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 
 	// Update Post with New Voter
 	updateOperator := coreData.UpdateOperator{
-		Set: postVote,
+		AddToSet: postVote,
 	}
 	options := &coreData.UpdateOptions{}
 	options.SetUpsert(true)
