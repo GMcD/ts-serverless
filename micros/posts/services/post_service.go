@@ -390,8 +390,17 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 		Avatar:      avatar,
 	}
 
+	var postVote = struct {
+		ObjectId uuid.UUID        `json:"objectId" bson:"objectId"`
+		Voter    dto.VoterProfile `json:"voter" bson:"voter"`
+	}{
+		ObjectId: objectId,
+		Voter:    voter,
+	}
+
+	// Update Post with New Voter
 	updateOperator := coreData.UpdateOperator{
-		Set: voter,
+		Set: postVote,
 	}
 	options := &coreData.UpdateOptions{}
 	options.SetUpsert(true)
