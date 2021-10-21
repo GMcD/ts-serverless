@@ -392,11 +392,11 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 
 	// Update Post with Voter
 	var postVote = struct {
-		ObjectId uuid.UUID        `json:"objectId" bson:"objectId"`
-		Votes    dto.VoterProfile `json:"votes" bson:"votes"`
+		ObjectId uuid.UUID          `json:"objectId" bson:"objectId"`
+		Votes    []dto.VoterProfile `json:"votes" bson:"votes"`
 	}{
 		ObjectId: objectId,
-		Votes:    voter,
+		Votes:    []dto.VoterProfile{voter},
 	}
 
 	// Update Post with New Voter
