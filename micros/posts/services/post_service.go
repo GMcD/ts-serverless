@@ -9,8 +9,6 @@ import (
 	uuid "github.com/gofrs/uuid"
 	"github.com/red-gold/telar-core/config"
 	coreData "github.com/red-gold/telar-core/data"
-	repo "github.com/red-gold/telar-core/data"
-	"github.com/red-gold/telar-core/data/mongodb"
 	mongoRepo "github.com/red-gold/telar-core/data/mongodb"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/utils"
@@ -21,7 +19,7 @@ import (
 
 // PostService handlers with injected dependencies
 type PostServiceImpl struct {
-	PostRepo repo.Repository
+	PostRepo coreData.Repository
 }
 
 // NewPostService initializes PostService's dependencies and create new PostService struct
@@ -32,7 +30,7 @@ func NewPostService(db interface{}) (PostService, error) {
 	switch *config.AppConfig.DBType {
 	case config.DB_MONGO:
 
-		mongodb := db.(mongodb.MongoDatabase)
+		mongodb := db.(mongoRepo.MongoDatabase)
 		postService.PostRepo = mongoRepo.NewDataRepositoryMongo(mongodb)
 
 	}
@@ -207,7 +205,7 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
 		}
 	}
-	if ownerUserIds != nil && len(ownerUserIds) > 0 {
+	if len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
 		inFilter["$in"] = ownerUserIds
 		filter["ownerUserId"] = inFilter
@@ -238,7 +236,7 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
 		}
 	}
-	if ownerUserIds != nil && len(ownerUserIds) > 0 {
+	if len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
 		inFilter["$in"] = ownerUserIds
 		filter["ownerUserId"] = inFilter
@@ -384,34 +382,22 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 
 	log.Info("IncrementScoreCount %v - (%v, %v, %v)", objectId, ownerUserId, displayName, avatar)
 
-	var voter = dto.VoterProfile{
+	voter := dto.VoterProfile{
 		ObjectId:    ownerUserId,
 		DisplayName: displayName,
 		Avatar:      avatar,
 	}
 
-	// Update Post with Voter
-	var postVote = struct {
-		ObjectId uuid.UUID          `json:"objectId" bson:"objectId"`
-		Votes    []dto.VoterProfile `json:"votes" bson:"votes"`
-	}{
-		ObjectId: objectId,
-		Votes:    []dto.VoterProfile{voter},
+	updateOperator := bson.M{
+		"$addToSet": bson.M{"votes": voter},
 	}
 
-	// Update Post with New Voter
-	// updateSetOperator := coreData.AddToSetOperator{
-	// 	AddToSet: postVote,
-	// }
-	updateOperator := coreData.UpdateOperator{
-		Set: postVote,
-	}
 	options := &coreData.UpdateOptions{}
 	options.SetUpsert(true)
 	return s.UpdatePost(filter, updateOperator, options)
 }
 
-// DecrementScoreCount increment score of post
+// DecrementScoreCount decrement score of post
 func (s PostServiceImpl) DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID) error {
 
 	filter := struct {
