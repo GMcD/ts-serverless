@@ -23,11 +23,11 @@ type PostQueryModel struct {
 }
 
 type PostFeedQueryModel struct {
-	Search          string      `query:"search"`
-	Page            int64       `query:"page"`
-	Owner           []uuid.UUID `query:"owner"`
-	CollectiveOwner []uuid.UUID `query:"collectiveOwner"`
-	Type            int         `query:"type"`
+	Search           string      `query:"search"`
+	Page             int64       `query:"page"`
+	Owner            []uuid.UUID `query:"owner"`
+	CollectiveOwners []uuid.UUID `query:"collectiveOwners"`
+	Type             int         `query:"type"`
 }
 
 type PostQueryCollectivesModel struct {
@@ -248,8 +248,8 @@ func GetFeedHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
 	}
 
-	log.Info("Querying Posts for '%s' from/by '%s' with collective", query.Search, query.Owner, query.CollectiveOwner)
-	postFeedList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, []uuid.UUID{}, query.Type, "created_date", query.Page)
+	log.Info("Querying Posts for '%s' from/by '%s' with collectives %v", query.Search, query.Owner, query.CollectiveOwners)
+	postFeedList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.CollectiveOwners, query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))
