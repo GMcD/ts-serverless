@@ -79,7 +79,7 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/:postId", append(hmacCookieHandlers, handlers.GetPostHandle)...)
 	app.Get("/urlkey/:urlkey", append(hmacCookieHandlers, handlers.GetPostByURLKeyHandle)...)
 
-	// Posting to collections
+	// Post to collectives
 	app.Post("/collectives/", append(hmacCookieHandlers, handlers.CreateCollectivesPostHandle)...)
 	app.Put("/collectives/profile", append(hmacCookieHandlers, handlers.UpdateCollectivesPostProfileHandle)...)
 
