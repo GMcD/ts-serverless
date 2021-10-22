@@ -56,7 +56,7 @@ func QueryCollectivesPostHandle(c *fiber.Ctx) error {
 	}
 
 	log.Info("Querying Post Collectives for '%s' from/by '%s' in '%s'", query.Search, query.Owner, query.CollectiveId)
-	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, query.CollectiveId, query.Type, "created_date", query.Page)
+	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, [query.CollectiveId], query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))
@@ -84,7 +84,7 @@ func QueryPostHandle(c *fiber.Ctx) error {
 	}
 
 	log.Info("Querying Posts for '%s' from/by '%s', no collective..", query.Search, query.Owner)
-	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, uuid.Nil, query.Type, "created_date", query.Page)
+	postList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, [], query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))
@@ -249,7 +249,7 @@ func GetFeedHandle(c *fiber.Ctx) error {
 	}
 
 	log.Info("Querying Posts for '%s' from/by '%s' with collective", query.Search, query.Owner, query.CollectiveOwner)
-	postFeedList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, uuid.Nil, query.Type, "created_date", query.Page)
+	postFeedList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, [], query.Type, "created_date", query.Page)
 	if err != nil {
 		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))
