@@ -32,7 +32,7 @@ bump:		## Update go mod version numbers on main
 bump: stack
 	npm --no-git-tag-version version patch && \
 	for mod in $$(find ./micros -name \*.mod); do \
-		awk -F "1." '/ts-serverless v/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/ts-serverless v/ { print }' $$mod > $${mod}.tmp && mv $${mod}.tmp $$mod; \
+		awk -F "0.1." '/ts-serverless v/ { printf $$1; for(i=2;i<NF;i++) printf FS$$i; print FS$$NF+1 } !/ts-serverless v/ { print }' $$mod > $${mod}.tmp && mv $${mod}.tmp $$mod; \
 	done  && \
 	for micro in $$(ls -d micros/*/); do pushd ./$${micro}; go mod tidy; popd; done && \
 	git add . ; git commit -m Version-$$(cat package.json | jq -j '.version'); git push
