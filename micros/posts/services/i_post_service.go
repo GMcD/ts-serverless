@@ -27,7 +27,7 @@ type PostService interface {
 	DisableCommnet(OwnerUserId uuid.UUID, objectId uuid.UUID, value bool) error
 	DisableSharing(OwnerUserId uuid.UUID, objectId uuid.UUID, value bool) error
 	IncrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, displayName string, avatar string) error
-	DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID) error
+	DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, displayName string, avatar string) error
 	Increment(objectId uuid.UUID, field string, value int) error
 	IncrementCommentCount(objectId uuid.UUID) error
 	DecrementCommentCount(objectId uuid.UUID) error

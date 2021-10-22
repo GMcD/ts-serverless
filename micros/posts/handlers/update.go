@@ -128,7 +128,7 @@ func IncrementScoreHandle(c *fiber.Ctx) error {
 
 		}
 	} else if model.Count < 0 {
-		err := postService.DecrementScoreCount(model.PostId, currentUser.UserID)
+		err := postService.DecrementScoreCount(model.PostId, currentUser.UserID, currentUser.DisplayName, currentUser.Avatar)
 		if err != nil {
 			errorMessage := fmt.Sprintf("[DecrementScoreCount] Update Post Error %s", err.Error())
 			log.Error(errorMessage)

@@ -398,7 +398,7 @@ func (s PostServiceImpl) IncrementScoreCount(objectId uuid.UUID, ownerUserId uui
 }
 
 // DecrementScoreCount decrement score of post
-func (s PostServiceImpl) DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID) error {
+func (s PostServiceImpl) DecrementScoreCount(objectId uuid.UUID, ownerUserId uuid.UUID, displayName string, avatar string) error {
 
 	filter := struct {
 		ObjectId uuid.UUID `json:"objectId" bson:"objectId"`
@@ -406,12 +406,16 @@ func (s PostServiceImpl) DecrementScoreCount(objectId uuid.UUID, ownerUserId uui
 		ObjectId: objectId,
 	}
 
-	data := make(map[string]interface{})
-	targetField := fmt.Sprintf("votes.%s", ownerUserId.String())
-	data[targetField] = nil
-	updateOperator := coreData.UpdateOperator{
-		Set: data,
+	voter := dto.VoterProfile{
+		ObjectId:    ownerUserId,
+		DisplayName: displayName,
+		Avatar:      avatar,
 	}
+
+	updateOperator := bson.M{
+		"$pull": bson.M{"votes": voter},
+	}
+
 	options := &coreData.UpdateOptions{}
 	options.SetUpsert(true)
 	return s.UpdatePost(filter, updateOperator, options)
