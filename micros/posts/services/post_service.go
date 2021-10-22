@@ -220,7 +220,7 @@ func (s PostServiceImpl) QueryPost(search string, ownerUserIds []uuid.UUID, post
 }
 
 // QueryPostIncludeUser get all posts by query including user entity
-func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid.UUID, collectiveId uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error) {
+func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid.UUID, collectiveIds []uuid.UUID, postTypeId int, sortBy string, page int64) ([]dto.Post, error) {
 	sortMap := make(map[string]int)
 	sortMap[sortBy] = -1
 	skip := numberOfItems * (page - 1)
@@ -236,7 +236,7 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 			bson.D{{"ownerDisplayName", primitive.Regex{Pattern: regexp, Options: "i"}}},
 		}
 	}
-	if ownerUserIds != nil && len(ownerUserIds) > 0 {
+	if len(ownerUserIds) > 0 {
 		inFilter := make(map[string]interface{})
 		inFilter["$in"] = ownerUserIds
 		filter["ownerUserId"] = inFilter
@@ -244,10 +244,11 @@ func (s PostServiceImpl) QueryPostIncludeUser(search string, ownerUserIds []uuid
 	if postTypeId > 0 {
 		filter["postTypeId"] = postTypeId
 	}
-	if collectiveId != uuid.Nil {
-		filter["collectiveId"] = collectiveId
+	if len(collectiveIds) > 0 {
+		inFilter := make(map[string]interface{})
+		inFilter["$in"] = collectiveIds
+		filter["collectiveId"] = inFilter
 	}
-
 	log.Info("FindPostsIncludeProfile filter : %s", filter)
 	result, err := s.FindPostsIncludeProfile(filter, limit, skip, sortMap)
 

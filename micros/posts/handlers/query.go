@@ -28,7 +28,6 @@ type PostFeedQueryModel struct {
 	Owner           []uuid.UUID `query:"owner"`
 	CollectiveOwner []uuid.UUID `query:"collectiveOwner"`
 	Type            int         `query:"type"`
-	CollectiveId    uuid.UUID   `query:"collectiveId"`
 }
 
 type PostQueryCollectivesModel struct {
@@ -95,18 +94,6 @@ func QueryPostHandle(c *fiber.Ctx) error {
 
 }
 
-func GetFeedHandle(c *fiber.Ctx) error {
-
-	postService, serviceErr := service.NewPostService(database.Db)
-	if serviceErr != nil {
-		log.Error("NewPostService %s", serviceErr.Error())
-		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/postService", "Error happened while creating postService for feed!"))
-	}
-
-	return c.JSON(feedList)
-
-}
-
 // GetPostHandle handle get a post
 func GetPostHandle(c *fiber.Ctx) error {
 
@@ -116,6 +103,7 @@ func GetPostHandle(c *fiber.Ctx) error {
 		log.Error("NewPostService %s", serviceErr.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/postService", "Error happened while creating postService!"))
 	}
+
 	postId := c.Params("postId")
 	if postId == "" {
 		errorMessage := fmt.Sprintf("Post Id is required!")
@@ -242,6 +230,32 @@ func GetPostByURLKeyHandle(c *fiber.Ctx) error {
 
 	return c.JSON(postModel)
 
+}
+
+// GetFeedHandle
+func GetFeedHandle(c *fiber.Ctx) error {
+	// Create service
+	postService, serviceErr := service.NewPostService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewPostService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/postService", "Error happened while creating postService!"))
+	}
+
+	query := new(PostFeedQueryModel)
+
+	if err := parser.QueryParser(c, query); err != nil {
+		log.Error("[QueryPostHandle] QueryParser %s", err.Error())
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("queryParser", "Error happened while parsing query!"))
+	}
+
+	log.Info("Querying Posts for '%s' from/by '%s' with collective", query.Search, query.Owner, query.CollectiveOwner)
+	postFeedList, err := postService.QueryPostIncludeUser(query.Search, query.Owner, uuid.Nil, query.Type, "created_date", query.Page)
+	if err != nil {
+		log.Error("[QueryPostHandle.postService.QueryPostIncludeUser] %s ", err.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/queryPost", "Error happened while query post!"))
+	}
+
+	return c.JSON(postFeedList)
 }
 
 // GeneratePostURLKeyHandle handle get post URL key
