@@ -13,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/gofiber/helmet/v2"
 	"github.com/red-gold/telar-core/config"
 	"github.com/red-gold/telar-core/pkg/log"
 	"github.com/red-gold/telar-core/utils"
@@ -45,6 +46,7 @@ func init() {
 	})
 	app.Use(recover.New())
 	app.Use(requestid.New())
+	app.Use(helmet.New())
 	app.Use(logger.New(
 		logger.Config{
 			Format: "[${time}] ${status} - ${latency} ${method} ${path} - ${header:}\n​",
