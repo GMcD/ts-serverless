@@ -22,6 +22,16 @@ import (
 // Cache state
 var app *fiber.App
 
+// Extra Headers
+var helmetHeaders = helmet.Config{
+	ContentSecurityPolicy: "upgrade-insecure-requests; script-src 'self' *.prod.monitalks.io; img-src 'self' https://prod-monitalks-media.s3.eu-west-2.amazonaws.com;",
+	CSPReportOnly:         false,
+	HSTSPreloadEnabled:    true,
+	ReferrerPolicy:        "origin",
+	HSTSMaxAge:            31536000,
+	HSTSExcludeSubdomains: true,
+}
+
 func init() {
 
 	micros.InitConfig()
@@ -46,7 +56,7 @@ func init() {
 	})
 	app.Use(recover.New())
 	app.Use(requestid.New())
-	app.Use(helmet.New())
+	app.Use(helmet.New(helmetHeaders))
 	app.Use(logger.New(
 		logger.Config{
 			Format: "[${time}] ${status} - ${latency} ${method} ${path} - ${header:}\n​",
