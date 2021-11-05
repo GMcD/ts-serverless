@@ -1,6 +1,6 @@
 module github.com/GMcD/ts-serverless/micros/votes
 
-replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v0.1.42
+replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v0.1.44
 
 go 1.16
 
