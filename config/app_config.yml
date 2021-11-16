@@ -15,7 +15,7 @@ environment:
   signature_cookie_name: si
   smtp_email: smtp.gmail.com:587
   write_timeout: 10s
-  cognito_user_pool: eu-west-2_ZWmfJ6vJs
+  cognito_user_pool: eu-west-2_AUPgCRT3z
   content_security_policy: "upgrade-insecure-requests; script-src 'self' *.prod.monitalks.io; img-src 'self' https://prod-monitalks-media.s3.eu-west-2.amazonaws.com https://util.telar.dev;"
   content_type_options: nosniff
   referrer_policy: origin
