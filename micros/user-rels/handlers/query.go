@@ -132,7 +132,6 @@ func GetFollowingHandle(c *fiber.Ctx) error {
 }
 
 func GetUserCollectiveFollowingHandle(c *fiber.Ctx) error {
-
 	// Create service
 	collectiveRelService, serviceErr := service.NewCollectiveRelService(database.Db)
 	if serviceErr != nil {
@@ -151,6 +150,68 @@ func GetUserCollectiveFollowingHandle(c *fiber.Ctx) error {
 	if err != nil {
 		log.Error("[GetCollectiveFollowingHandle.collectiveRelService.GetCollectiveFollowing] %s", err.Error())
 		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/getCollectiveFollowing", "Error happened while reading following!"))
+	}
+
+	return c.JSON(following)
+}
+
+func GetFollowersByUserIdHandle(c *fiber.Ctx) error {
+	userId := c.Params("userId")
+	if userId == "" {
+		errorMessage := fmt.Sprintf("User Id is required!")
+		log.Error(errorMessage)
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdRequired", errorMessage))
+	}
+
+	targetUserUUID, uuidErr := uuid.FromString(userFollowingId)
+	if uuidErr != nil {
+		errorMessage := fmt.Sprintf("userUUID Error %s", uuidErr.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdNotValid", "user id is not valid!"))
+	}
+
+	// Create service
+	userRelService, serviceErr := service.NewUserRelService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewUserRelService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/userRelService", "Error happened while creating userRelService!"))
+	}
+
+	followers, err := userRelService.GetFollowers(targetUserUUID)
+	if err != nil {
+		log.Error("[GetFollowersHandle.userRelService.GetFollowersByUserId] %s", err.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/getFollowersbyUserId", "Error happened while reading followers!"))
+	}
+
+	return c.JSON(followers)
+}
+
+func GetFollowingByUserIdHandle(c *fiber.Ctx) error {
+	userId := c.Params("userId")
+	if userId == "" {
+		errorMessage := fmt.Sprintf("User Id is required!")
+		log.Error(errorMessage)
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdRequired", errorMessage))
+	}
+
+	targetUserUUID, uuidErr := uuid.FromString(userFollowingId)
+	if uuidErr != nil {
+		errorMessage := fmt.Sprintf("userUUID Error %s", uuidErr.Error())
+		log.Error(errorMessage)
+		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdNotValid", "user id is not valid!"))
+	}
+
+	// Create service
+	userRelService, serviceErr := service.NewUserRelService(database.Db)
+	if serviceErr != nil {
+		log.Error("NewUserRelService %s", serviceErr.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/userRelService", "Error happened while creating userRelService!"))
+	}
+
+	following, err := userRelService.GetFollowing(targetUserUUID)
+	if err != nil {
+		log.Error("[GetFollowingHandle.userRelService.GetFollowingByUserId] %s", err.Error())
+		return c.Status(http.StatusInternalServerError).JSON(utils.Error("internal/getFollowingByUserId", "Error happened while reading following!"))
 	}
 
 	return c.JSON(following)

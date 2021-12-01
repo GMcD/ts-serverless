@@ -164,7 +164,6 @@ func GetPostHandle(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(postModel)
-
 }
 
 // GetPostByURLKeyHandle handle get a post

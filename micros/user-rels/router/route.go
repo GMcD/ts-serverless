@@ -59,11 +59,12 @@ func SetupRoutes(app *fiber.App) {
 	app.Delete("/unfollow/:userId", append(hmacCookieHandlers, handlers.UnfollowHandle)...)
 	app.Delete("/circle/:circleId", append(hmacCookieHandlers, handlers.DeleteCircle)...)
 	app.Put("/circles", append(hmacCookieHandlers, handlers.UpdateRelCirclesHandle)...)
-	app.Get("/followers", append(hmacCookieHandlers, handlers.GetFollowersHandle)...)
-	app.Get("/following", append(hmacCookieHandlers, handlers.GetFollowingHandle)...)
-
 	app.Post("/collectives/follow", append(hmacCookieHandlers, handlers.CollectiveFollowHandle)...)
 	app.Post("/collectives/unfollow/:collectiveId", append(hmacCookieHandlers, handlers.CollectiveUnFollowHandle)...)
-
 	app.Get("/collectives/userFollowing", append(hmacCookieHandlers, handlers.GetUserCollectiveFollowingHandle)...)
+	// TODO: These endpoints require pagination
+	app.Get("/followers", append(hmacCookieHandlers, handlers.GetFollowersHandle)...)
+	app.Get("/following", append(hmacCookieHandlers, handlers.GetFollowingHandle)...)
+	app.Get("/followers/:userId", append(hmacCookieHandlers, handlers.GetFollowersHandle)...)
+	app.Get("/following/:userId", append(hmacCookieHandlers, handlers.GetFollowingHandle)...)
 }
