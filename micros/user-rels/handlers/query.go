@@ -163,7 +163,7 @@ func GetFollowersByUserIdHandle(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdRequired", errorMessage))
 	}
 
-	targetUserUUID, uuidErr := uuid.FromString(userFollowingId)
+	targetUserUUID, uuidErr := uuid.FromString(userId)
 	if uuidErr != nil {
 		errorMessage := fmt.Sprintf("userUUID Error %s", uuidErr.Error())
 		log.Error(errorMessage)
@@ -189,12 +189,12 @@ func GetFollowersByUserIdHandle(c *fiber.Ctx) error {
 func GetFollowingByUserIdHandle(c *fiber.Ctx) error {
 	userId := c.Params("userId")
 	if userId == "" {
-		errorMessage := fmt.Sprintf("User Id is required!")
-		log.Error(errorMessage)
+		errorMessage := fmt.Sprintf()
+		log.Error("User Id is required!")
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdRequired", errorMessage))
 	}
 
-	targetUserUUID, uuidErr := uuid.FromString(userFollowingId)
+	targetUserUUID, uuidErr := uuid.FromString(userId)
 	if uuidErr != nil {
 		errorMessage := fmt.Sprintf("userUUID Error %s", uuidErr.Error())
 		log.Error(errorMessage)
