@@ -189,8 +189,8 @@ func GetFollowersByUserIdHandle(c *fiber.Ctx) error {
 func GetFollowingByUserIdHandle(c *fiber.Ctx) error {
 	userId := c.Params("userId")
 	if userId == "" {
-		errorMessage := fmt.Sprintf()
-		log.Error("User Id is required!")
+		errorMessage := fmt.Sprintf("User Id is required!")
+		log.Error(errorMessage)
 		return c.Status(http.StatusBadRequest).JSON(utils.Error("userIdRequired", errorMessage))
 	}
 
