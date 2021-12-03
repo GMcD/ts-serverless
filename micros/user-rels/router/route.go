@@ -65,6 +65,6 @@ func SetupRoutes(app *fiber.App) {
 	// TODO: These endpoints require pagination
 	app.Get("/followers", append(hmacCookieHandlers, handlers.GetFollowersHandle)...)
 	app.Get("/following", append(hmacCookieHandlers, handlers.GetFollowingHandle)...)
-	app.Get("/followers/:userId", append(hmacCookieHandlers, handlers.GetFollowersHandle)...)
-	app.Get("/following/:userId", append(hmacCookieHandlers, handlers.GetFollowingHandle)...)
+	app.Get("/followers/:userId", append(hmacCookieHandlers, handlers.GetFollowersByUserIdHandle)...)
+	app.Get("/following/:userId", append(hmacCookieHandlers, handlers.GetFollowingByUserIdHandle)...)
 }
