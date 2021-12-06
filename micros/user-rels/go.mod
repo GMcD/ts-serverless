@@ -1,6 +1,6 @@
 module github.com/GMcD/ts-serverless/micros/user-rels
 
-replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v0.1.44
+replace github.com/red-gold/telar-core v0.1.16 => github.com/GMcD/telar-core v1.0.78
 
 go 1.15
 
